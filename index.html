@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kasir Pintar v1.0.0</title>
+    <title>Kasir Pintar v1.1.0</title>
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     
     <style>
@@ -14,28 +15,30 @@
             --surface-color: #ffffff;
             --text-main: #2d3748;
             --text-muted: #718096;
-            --primary: #4338ca;
-            --primary-hover: #3730a3;
-            --success: #10b981;
-            --danger: #ef4444;
+            --primary: #1877f2;
+            --primary-hover: #166fe5;
+            --success: #00d26a;
+            --danger: #ff4d4f;
             --border: #e2e8f0;
             --btn-bg: #edf2f7;
             --btn-text: #2d3748;
+            --status-bg: #f8f9fa;
         }
 
         [data-theme="dark"] {
-            /* Dark Theme */
-            --bg-color: #121212;
-            --surface-color: #1e1e1e;
+            /* Dark Theme (Disesuaikan dengan Screenshot) */
+            --bg-color: #1a1a1c;
+            --surface-color: #222225;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --success: #34d399;
-            --danger: #f87171;
-            --border: #374151;
-            --btn-bg: #374151;
-            --btn-text: #f3f4f6;
+            --primary: #1976d2; 
+            --primary-hover: #1565c0;
+            --success: #4ade80; 
+            --danger: #ef4444;
+            --border: #333336;
+            --btn-bg: #2d2d31;
+            --btn-text: #e5e7eb;
+            --status-bg: #1e1e20;
         }
 
         /* --- Reset & Base Styles --- */
@@ -55,13 +58,11 @@
             justify-content: center;
         }
 
-        /* Container Mobile */
         .app-container {
             width: 100%;
-            max-width: 480px; /* Ukuran maksimal untuk tampilan mobile */
+            max-width: 480px;
             min-height: 100vh;
             background-color: var(--surface-color);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
         }
@@ -76,7 +77,7 @@
         }
 
         .header-title h1 {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 700;
         }
 
@@ -88,7 +89,7 @@
         .theme-toggle {
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
             color: var(--text-main);
         }
@@ -98,43 +99,49 @@
             padding: 20px;
             flex: 1;
             overflow-y: auto;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .form-group label {
             display: block;
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             margin-bottom: 8px;
             color: var(--text-muted);
             font-weight: 600;
+            text-transform: uppercase;
         }
 
-        /* Input Besar */
-        .input-large {
+        /* Input Styles */
+        .input-box {
             width: 100%;
-            background-color: var(--bg-color);
+            background-color: transparent;
             border: 1px solid var(--border);
             color: var(--text-main);
-            padding: 16px;
-            font-size: 1.5rem;
+            padding: 14px 16px;
+            font-size: 1.25rem;
             font-weight: bold;
-            border-radius: 12px;
-            text-align: right;
+            border-radius: 8px;
             outline: none;
             transition: border-color 0.2s;
         }
 
-        .input-large:focus {
+        .input-box:focus {
             border-color: var(--primary);
         }
 
-        /* Metode Pembayaran (Radio Buttons bergaya Box) */
+        /* --- Payment Methods (Sesuai Referensi Gambar) --- */
         .payment-methods {
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .payment-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
 
         .payment-methods input[type="radio"] {
@@ -142,41 +149,51 @@
         }
 
         .payment-label {
-            flex: 1;
             text-align: center;
             padding: 12px 8px;
-            background-color: var(--btn-bg);
+            background-color: transparent;
             color: var(--btn-text);
-            border-radius: 8px;
-            font-size: 0.875rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
             font-weight: 600;
-            border: 2px solid transparent;
             cursor: pointer;
             transition: all 0.2s;
         }
 
+        /* Active State Payment */
         .payment-methods input[type="radio"]:checked + .payment-label {
             background-color: var(--primary);
-            color: white;
-            border-color: var(--primary-hover);
+            color: #ffffff;
+            border-color: var(--primary);
         }
 
-        /* Grid Tombol Pintasan Nominal */
+        .split-label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            background-color: #161e2e; /* Khusus split payment agak biru gelap */
+            border-color: #1f2937;
+            color: var(--primary);
+        }
+
+        /* --- Quick Amounts (4 Kolom) --- */
         .quick-amounts {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 10px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 12px;
         }
 
         .btn-quick {
             background-color: var(--btn-bg);
-            color: var(--btn-text);
+            color: var(--text-main);
             border: none;
-            padding: 12px 0;
-            border-radius: 8px;
+            padding: 10px 0;
+            border-radius: 6px;
             font-weight: 600;
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: background-color 0.2s;
         }
@@ -185,132 +202,162 @@
             background-color: var(--border);
         }
 
-        .btn-pas {
-            grid-column: span 3;
-            background-color: var(--primary);
-            color: white;
+        .btn-clear {
+            color: var(--danger);
+            background-color: #2a1a1c; /* Aksen merah sangat gelap untuk C */
         }
 
-        .btn-pas:active {
-            background-color: var(--primary-hover);
-        }
-
-        /* --- Footer / Result Section --- */
+        /* --- Summary Section (Bawah) --- */
         .summary-section {
             padding: 20px;
-            background-color: var(--bg-color);
             border-top: 1px solid var(--border);
-            border-radius: 16px 16px 0 0;
+            background-color: var(--surface-color);
             margin-top: auto;
         }
 
-        .summary-row {
+        .total-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .total-label {
             font-size: 1rem;
-        }
-
-        .summary-row.total {
-            font-size: 1.25rem;
-            font-weight: bold;
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px dashed var(--border);
-        }
-
-        .status-badge {
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: bold;
+            font-weight: 800;
             text-transform: uppercase;
         }
 
-        .status-lunas { background-color: var(--success); color: white; }
-        .status-kurang { background-color: var(--danger); color: white; }
-        .status-netral { background-color: var(--text-muted); color: white; }
+        .total-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+
+        .status-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background-color: var(--status-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+
+        .status-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .status-result {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .text-green { color: var(--success); }
+        .text-red { color: var(--danger); }
+        .text-neutral { color: var(--text-muted); }
 
         .btn-reset {
             width: 100%;
-            padding: 16px;
-            background-color: var(--btn-bg);
-            color: var(--text-main);
+            padding: 14px;
+            background-color: transparent;
+            color: var(--text-muted);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            font-size: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
             font-weight: bold;
             margin-top: 16px;
             cursor: pointer;
+        }
+        
+        .btn-reset:active {
+            background-color: var(--border);
         }
     </style>
 </head>
 <body>
 
     <div class="app-container">
+        <!-- Header -->
         <header>
             <div class="header-title">
                 <h1>Kasir Pintar</h1>
-                <span>v1.0.0</span>
+                <span>v1.1.0</span>
             </div>
             <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">☀️</button>
         </header>
 
+        <!-- Main Content -->
         <main>
+            <!-- Input Total Belanja -->
             <div class="form-group">
                 <label>Total Belanja</label>
-                <input type="text" id="totalBelanja" class="input-large" inputmode="numeric" placeholder="0" oninput="formatInput(this); calculate()">
+                <input type="text" id="totalBelanja" class="input-box" inputmode="numeric" placeholder="0" oninput="formatInput(this); calculate()">
             </div>
 
-            <div class="form-group">
-                <label>Metode Pembayaran</label>
-                <div class="payment-methods">
-                    <input type="radio" id="payTunai" name="payment" value="Tunai" checked onchange="handlePaymentChange()">
-                    <label for="payTunai" class="payment-label">Tunai</label>
-
-                    <input type="radio" id="payQris" name="payment" value="QRIS" onchange="handlePaymentChange()">
-                    <label for="payQris" class="payment-label">QRIS/Debit</label>
-
+            <!-- Metode Pembayaran (Redesain) -->
+            <div class="payment-methods">
+                <div class="payment-row">
+                    <div>
+                        <input type="radio" id="payTunai" name="payment" value="Tunai" checked onchange="handlePaymentChange()">
+                        <label for="payTunai" class="payment-label" style="display:block;">Tunai</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="payQris" name="payment" value="QRIS" onchange="handlePaymentChange()">
+                        <label for="payQris" class="payment-label" style="display:block;">QRIS/Debit</label>
+                    </div>
+                </div>
+                <div>
                     <input type="radio" id="paySplit" name="payment" value="Split" onchange="handlePaymentChange()">
-                    <label for="paySplit" class="payment-label">Split</label>
+                    <label for="paySplit" class="payment-label split-label" style="display:flex;">
+                        <span>🔀</span> Split Payment
+                    </label>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>Uang Diterima</label>
-                <input type="text" id="uangDiterima" class="input-large" inputmode="numeric" placeholder="0" oninput="formatInput(this); calculate()">
+            <!-- Area Input Uang Diterima -->
+            <div class="form-group" style="margin-top: 10px;">
+                <input type="text" id="uangDiterima" class="input-box" inputmode="numeric" placeholder="0" oninput="formatInput(this); calculate()">
                 
+                <!-- Quick Amounts 4 Kolom -->
                 <div class="quick-amounts">
-                    <button class="btn-quick btn-pas" onclick="setQuickAmount('pas')">Uang Pas</button>
+                    <button class="btn-quick" onclick="setQuickAmount('pas')">Uang Pas</button>
                     <button class="btn-quick" onclick="setQuickAmount(5000)">5K</button>
                     <button class="btn-quick" onclick="setQuickAmount(10000)">10K</button>
                     <button class="btn-quick" onclick="setQuickAmount(20000)">20K</button>
+                    
                     <button class="btn-quick" onclick="setQuickAmount(50000)">50K</button>
                     <button class="btn-quick" onclick="setQuickAmount(75000)">75K</button>
                     <button class="btn-quick" onclick="setQuickAmount(100000)">100K</button>
+                    <button class="btn-quick btn-clear" onclick="clearTerima()">C</button>
                 </div>
             </div>
         </main>
 
+        <!-- Summary Section Sesuai Gambar -->
         <div class="summary-section">
-            <div class="summary-row">
-                <span>Status</span>
-                <span id="statusBadge" class="status-badge status-netral">-</span>
+            <div class="total-row">
+                <span class="total-label">TOTAL</span>
+                <span class="total-value" id="displayTotal">Rp 0</span>
             </div>
-            <div class="summary-row total">
-                <span id="labelKembalian">Kembalian</span>
-                <span id="nilaiKembalian">Rp 0</span>
+
+            <div class="status-box">
+                <span class="status-label">Status</span>
+                <span class="status-result text-neutral" id="statusResult">-</span>
             </div>
+
             <button class="btn-reset" onclick="resetForm()">Reset Transaksi</button>
         </div>
     </div>
 
+    <!-- Script Logika -->
     <script>
         // --- Tema Setup ---
         const html = document.documentElement;
         const themeToggleBtn = document.getElementById('themeToggle');
         
-        // Cek LocalStorage untuk tema yang tersimpan
         const savedTheme = localStorage.getItem('theme') || 'dark';
         html.setAttribute('data-theme', savedTheme);
         updateThemeIcon(savedTheme);
@@ -330,11 +377,9 @@
         // --- Logika Kasir ---
         const inputTotal = document.getElementById('totalBelanja');
         const inputTerima = document.getElementById('uangDiterima');
-        const labelKembalian = document.getElementById('labelKembalian');
-        const nilaiKembalian = document.getElementById('nilaiKembalian');
-        const statusBadge = document.getElementById('statusBadge');
+        const displayTotal = document.getElementById('displayTotal');
+        const statusResult = document.getElementById('statusResult');
 
-        // Format angka ke format ribuan (Rupiah) tanpa desimal saat diketik
         function formatInput(input) {
             let value = input.value.replace(/[^0-9]/g, '');
             if (value !== '') {
@@ -344,13 +389,11 @@
             }
         }
 
-        // Dapatkan angka asli (integer) dari input string
         function getRawValue(str) {
             if (!str) return 0;
             return parseInt(str.replace(/[^0-9]/g, ''), 10) || 0;
         }
 
-        // Jika QRIS dipilih, otomatis uang diterima sama dengan total belanja (Uang Pas)
         function handlePaymentChange() {
             const method = document.querySelector('input[name="payment"]:checked').value;
             if (method === 'QRIS') {
@@ -358,7 +401,6 @@
             }
         }
 
-        // Tombol Nominal Pintasan
         function setQuickAmount(amount) {
             let total = getRawValue(inputTotal.value);
             
@@ -370,40 +412,46 @@
             calculate();
         }
 
-        // Kalkulasi Kembalian & Status
+        function clearTerima() {
+            inputTerima.value = '';
+            calculate();
+        }
+
         function calculate() {
             const total = getRawValue(inputTotal.value);
             const terima = getRawValue(inputTerima.value);
             
+            // Update UI Teks Biru Total
+            displayTotal.innerText = "Rp " + total.toLocaleString('id-ID');
+
             if (total === 0 && terima === 0) {
                 resetSummary();
+                return;
+            }
+
+            if (terima === 0) {
+                statusResult.innerText = "-";
+                statusResult.className = "status-result text-neutral";
                 return;
             }
 
             const selisih = terima - total;
 
             if (selisih >= 0) {
-                labelKembalian.innerText = "Kembalian";
-                nilaiKembalian.innerText = "Rp " + selisih.toLocaleString('id-ID');
-                statusBadge.innerText = "LUNAS";
-                statusBadge.className = "status-badge status-lunas";
+                statusResult.innerText = "Kembali: Rp " + selisih.toLocaleString('id-ID');
+                statusResult.className = "status-result text-green";
             } else {
-                labelKembalian.innerText = "Kurang";
-                // Menampilkan nominal kurang (diubah jadi positif untuk tampilan)
-                nilaiKembalian.innerText = "Rp " + Math.abs(selisih).toLocaleString('id-ID');
-                statusBadge.innerText = "BELUM LUNAS";
-                statusBadge.className = "status-badge status-kurang";
+                statusResult.innerText = "Kurang: Rp " + Math.abs(selisih).toLocaleString('id-ID');
+                statusResult.className = "status-result text-red";
             }
         }
 
         function resetSummary() {
-            labelKembalian.innerText = "Kembalian";
-            nilaiKembalian.innerText = "Rp 0";
-            statusBadge.innerText = "-";
-            statusBadge.className = "status-badge status-netral";
+            displayTotal.innerText = "Rp 0";
+            statusResult.innerText = "-";
+            statusResult.className = "status-result text-neutral";
         }
 
-        // Reset semua form
         function resetForm() {
             inputTotal.value = '';
             inputTerima.value = '';
