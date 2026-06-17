@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kasir Pintar v1.2.0</title>
+    <title>Kasir Pintar v1.3.0</title>
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     
     <style>
@@ -92,6 +93,13 @@
             font-size: 1.2rem;
             cursor: pointer;
             color: var(--text-main);
+            padding: 6px;
+            border-radius: 50%;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+        .theme-toggle:hover {
+            background-color: var(--btn-bg);
+            transform: scale(1.1);
         }
 
         /* --- Main Content --- */
@@ -124,14 +132,16 @@
             font-weight: bold;
             border-radius: 8px;
             outline: none;
-            transition: border-color 0.2s;
+            transition: border-color 0.2s, box-shadow 0.2s;
             text-align: left;
         }
-
-        .input-box:focus { border-color: var(--primary); }
+        .input-box:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.15);
+        }
         .input-box::placeholder { color: var(--text-muted); font-weight: 600; font-size: 1rem; opacity: 1; }
 
-        /* --- Payment Methods --- */
+        /* --- Payment Methods & Hovers --- */
         .payment-methods {
             display: flex;
             flex-direction: column;
@@ -156,13 +166,21 @@
             font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
+        }
+        .payment-label:hover {
+            background-color: var(--btn-bg);
+            border-color: var(--text-muted);
         }
 
+        /* Active State Payment */
         .payment-methods input[type="radio"]:checked + .payment-label {
             background-color: var(--primary);
             color: #ffffff;
             border-color: var(--primary);
+        }
+        .payment-methods input[type="radio"]:checked + .payment-label:hover {
+            background-color: var(--primary-hover);
         }
 
         .split-label {
@@ -174,8 +192,11 @@
             border-color: #1f2937;
             color: var(--primary);
         }
+        .split-label:hover {
+            background-color: #1e293b;
+        }
 
-        /* --- Quick Amounts --- */
+        /* --- Quick Amounts & Hovers --- */
         .quick-amounts {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -187,16 +208,26 @@
             background-color: var(--btn-bg);
             color: var(--text-main);
             border: none;
-            padding: 10px 0;
+            padding: 12px 0;
             border-radius: 6px;
             font-weight: 600;
             font-size: 0.85rem;
             cursor: pointer;
-            transition: background-color 0.2s;
+            transition: all 0.2s ease;
         }
+        .btn-quick:hover {
+            background-color: var(--border);
+            filter: brightness(1.15);
+        }
+        .btn-quick:active { transform: scale(0.97); }
 
-        .btn-quick:active { background-color: var(--border); }
-        .btn-clear { color: var(--danger); background-color: #2a1a1c; }
+        .btn-clear {
+            color: var(--danger);
+            background-color: #2a1a1c;
+        }
+        .btn-clear:hover {
+            background-color: #3d2225;
+        }
 
         /* --- Summary Section --- */
         .summary-section {
@@ -227,7 +258,7 @@
         }
 
         .status-label { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); }
-        .status-result { font-size: 1rem; font-weight: 700; text-align: right; } /* Ukuran sedikit dikecilkan agar muat teks split panjang */
+        .status-result { font-size: 1rem; font-weight: 700; text-align: right; }
 
         .text-green { color: var(--success); }
         .text-red { color: var(--danger); }
@@ -244,21 +275,26 @@
             font-weight: bold;
             margin-top: 16px;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
-        .btn-reset:active { background-color: var(--border); }
+        .btn-reset:hover {
+            background-color: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+        .btn-reset:active { transform: scale(0.98); }
 
         /* --- Split Payment Modal --- */
         .modal-overlay {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background-color: rgba(0, 0, 0, 0.75);
-            display: none; /* Default Hidden */
+            display: none; 
             justify-content: center;
             align-items: center;
             z-index: 100;
             padding: 20px;
         }
-
         .modal-overlay.active { display: flex; }
 
         .modal-content {
@@ -279,7 +315,6 @@
             align-items: center;
             border-bottom: 1px solid var(--border);
             padding-bottom: 16px;
-            margin-bottom: 4px;
         }
 
         .modal-title { font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; color: var(--text-main); }
@@ -292,13 +327,9 @@
             border-radius: 10px;
             padding: 12px;
         }
-
         .split-box label { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; display: block;}
         
-        .split-inputs {
-            display: flex;
-            gap: 8px;
-        }
+        .split-inputs { display: flex; gap: 8px; }
 
         .split-select {
             width: 35%;
@@ -322,16 +353,11 @@
             font-weight: bold;
             border-radius: 6px;
             outline: none;
+            transition: border-color 0.2s;
         }
-
         .split-input:focus { border-color: var(--primary); }
 
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 8px;
-        }
-
+        .modal-actions { display: flex; gap: 12px; margin-top: 8px; }
         .modal-actions button {
             flex: 1;
             padding: 14px;
@@ -340,29 +366,39 @@
             font-size: 0.95rem;
             cursor: pointer;
             border: none;
+            transition: all 0.2s ease;
         }
 
         .btn-modal-cancel { background-color: var(--btn-bg); color: var(--text-main); }
+        .btn-modal-cancel:hover { background-color: var(--border); filter: brightness(0.9); }
+        .btn-modal-cancel:active { transform: scale(0.97); }
+
         .btn-modal-apply { background-color: var(--primary); color: white; }
+        .btn-modal-apply:hover { background-color: var(--primary-hover); box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3); }
+        .btn-modal-apply:active { transform: scale(0.97); }
     </style>
 </head>
 <body>
 
     <div class="app-container">
+        <!-- Header -->
         <header>
             <div class="header-title">
                 <h1>Kasir Pintar</h1>
-                <span>v1.2.0</span>
+                <span>v1.3.0</span>
             </div>
             <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">☀️</button>
         </header>
 
+        <!-- Main Content -->
         <main>
+            <!-- Input Total Belanja -->
             <div class="form-group">
                 <label>Total Belanja</label>
                 <input type="text" id="totalBelanja" class="input-box" inputmode="numeric" placeholder="0" oninput="formatInput(this); handleMainInput(); calculate()">
             </div>
 
+            <!-- Metode Pembayaran -->
             <div class="payment-methods">
                 <div class="payment-row">
                     <div>
@@ -382,9 +418,11 @@
                 </div>
             </div>
 
+            <!-- Area Input Uang Diterima -->
             <div class="form-group" style="margin-top: 10px;">
                 <input type="text" id="uangDiterima" class="input-box" inputmode="numeric" placeholder="Uang Diterima (Rp)" oninput="formatInput(this); handleMainInput(); calculate()">
                 
+                <!-- Quick Amounts -->
                 <div class="quick-amounts">
                     <button class="btn-quick" onclick="setQuickAmount('pas')">Uang Pas</button>
                     <button class="btn-quick" onclick="setQuickAmount(5000)">5K</button>
@@ -398,6 +436,7 @@
             </div>
         </main>
 
+        <!-- Summary Section -->
         <div class="summary-section">
             <div class="total-row">
                 <span class="total-label">TOTAL</span>
@@ -410,6 +449,7 @@
             <button class="btn-reset" onclick="resetForm()">Reset Transaksi</button>
         </div>
 
+        <!-- Split Payment Modal -->
         <div id="splitModal" class="modal-overlay">
             <div class="modal-content">
                 <div class="modal-header">
@@ -424,7 +464,7 @@
                             <option value="Tunai">Tunai</option>
                             <option value="QRIS">QRIS</option>
                         </select>
-                        <input type="text" id="splitAmount1" class="split-input" inputmode="numeric" placeholder="0" oninput="formatInput(this)">
+                        <input type="text" id="splitAmount1" class="split-input" inputmode="numeric" placeholder="0" oninput="formatInput(this); syncSplitAmounts(1)">
                     </div>
                 </div>
 
@@ -435,7 +475,7 @@
                             <option value="QRIS" selected>QRIS</option>
                             <option value="Tunai">Tunai</option>
                         </select>
-                        <input type="text" id="splitAmount2" class="split-input" inputmode="numeric" placeholder="0" oninput="formatInput(this)">
+                        <input type="text" id="splitAmount2" class="split-input" inputmode="numeric" placeholder="0" oninput="formatInput(this); syncSplitAmounts(2)">
                     </div>
                 </div>
 
@@ -447,6 +487,7 @@
         </div>
     </div>
 
+    <!-- Script Logika -->
     <script>
         // --- Tema Setup ---
         const html = document.documentElement;
@@ -501,13 +542,12 @@
             if (method === 'Split') {
                 openSplitModal();
             } else {
-                isSplitActive = false; // Matikan status split jika ganti ke Tunai/QRIS
+                isSplitActive = false;
                 if (method === 'QRIS') setQuickAmount('pas');
                 else calculate();
             }
         }
 
-        // Jika user mengetik manual di input Total/Terima, nonaktifkan mode Split
         function handleMainInput() {
             if (isSplitActive) {
                 isSplitActive = false;
@@ -515,9 +555,8 @@
             }
         }
 
-        // Quick Amounts
         function setQuickAmount(amount) {
-            handleMainInput(); // Reset split jika pakai quick amount
+            handleMainInput();
             let total = getRawValue(inputTotal.value);
             inputTerima.value = amount === 'pas' ? total.toLocaleString('id-ID') : amount.toLocaleString('id-ID');
             calculate();
@@ -529,12 +568,12 @@
             calculate();
         }
 
-        // --- Logic Split Modal ---
+        // --- Logic Otomatisasi Balancing Split (Sesuai Screenshot 2026-06-18 032814.png) ---
         function openSplitModal() {
             const total = getRawValue(inputTotal.value);
             modalTotalDisplay.innerText = "Rp " + total.toLocaleString('id-ID');
             
-            // Auto-fill setengah-setengah (Opsional, mempermudah kasir)
+            // Default pembagian awal 50/50 agar mempermudah kasir
             let half = Math.floor(total / 2);
             let remainder = total - half;
             splitAmount1.value = half > 0 ? half.toLocaleString('id-ID') : '';
@@ -543,10 +582,27 @@
             modalOverlay.classList.add('active');
         }
 
+        function syncSplitAmounts(changedField) {
+            const total = getRawValue(inputTotal.value);
+            const v1 = getRawValue(splitAmount1.value);
+            const v2 = getRawValue(splitAmount2.value);
+
+            if (changedField === 1) {
+                // Jika input 1 berubah, input 2 otomatis menghitung sisanya
+                let remainder = total - v1;
+                if (remainder < 0) remainder = 0;
+                splitAmount2.value = remainder > 0 ? remainder.toLocaleString('id-ID') : '0';
+            } else if (changedField === 2) {
+                // Jika input 2 berubah, input 1 otomatis menghitung sisanya
+                let remainder = total - v2;
+                if (remainder < 0) remainder = 0;
+                splitAmount1.value = remainder > 0 ? remainder.toLocaleString('id-ID') : '0';
+            }
+        }
+
         function closeSplitModal(isCancel = false) {
             modalOverlay.classList.remove('active');
             if (isCancel) {
-                // Jika batal, kembalikan pilihan ke Tunai
                 document.getElementById('payTunai').checked = true;
                 isSplitActive = false;
                 calculate();
@@ -556,14 +612,7 @@
         function applySplit() {
             const v1 = getRawValue(splitAmount1.value);
             const v2 = getRawValue(splitAmount2.value);
-            const total = getRawValue(inputTotal.value);
-
-            // Validasi (Bisa dihilangkan jika ingin kasir bisa input bebas, tapi umumnya split = lunas)
-            if (v1 + v2 < total && total > 0) {
-                alert("Total split pembayaran masih kurang dari Total Belanja!");
-                return;
-            }
-
+            
             isSplitActive = true;
             splitData = {
                 m1: splitMethod1.value,
@@ -572,9 +621,7 @@
                 v2: v2
             };
             
-            // Set Uang Diterima di background agar selaras
             inputTerima.value = (v1 + v2).toLocaleString('id-ID');
-            
             closeSplitModal();
             calculate();
         }
@@ -590,14 +637,12 @@
                 return;
             }
 
-            // Jika Mode Split Aktif
             if (isSplitActive) {
                 statusResult.innerText = `Split: ${splitData.m1} (Rp ${splitData.v1.toLocaleString('id-ID')}) + ${splitData.m2} (Rp ${splitData.v2.toLocaleString('id-ID')})`;
                 statusResult.className = "status-result text-green";
                 return;
             }
 
-            // Jika Mode Normal (Tunai/QRIS)
             if (terima === 0) {
                 statusResult.innerText = "-";
                 statusResult.className = "status-result text-neutral";
