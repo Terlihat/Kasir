@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kasir Pintar v1.1.0</title>
-    <!-- Favicon -->
+    <title>Kasir Pintar v1.2.0</title>
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     
     <style>
         /* --- CSS Variables untuk Tema --- */
         :root {
-            /* Light Theme */
             --bg-color: #f4f6f8;
             --surface-color: #ffffff;
+            --modal-bg: #ffffff;
             --text-main: #2d3748;
             --text-muted: #718096;
             --primary: #1877f2;
@@ -26,9 +25,9 @@
         }
 
         [data-theme="dark"] {
-            /* Dark Theme (Disesuaikan dengan Screenshot) */
             --bg-color: #1a1a1c;
             --surface-color: #222225;
+            --modal-bg: #222225;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
             --primary: #1976d2; 
@@ -65,6 +64,7 @@
             background-color: var(--surface-color);
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         /* --- Header --- */
@@ -125,13 +125,13 @@
             border-radius: 8px;
             outline: none;
             transition: border-color 0.2s;
+            text-align: left;
         }
 
-        .input-box:focus {
-            border-color: var(--primary);
-        }
+        .input-box:focus { border-color: var(--primary); }
+        .input-box::placeholder { color: var(--text-muted); font-weight: 600; font-size: 1rem; opacity: 1; }
 
-        /* --- Payment Methods (Sesuai Referensi Gambar) --- */
+        /* --- Payment Methods --- */
         .payment-methods {
             display: flex;
             flex-direction: column;
@@ -144,9 +144,7 @@
             gap: 12px;
         }
 
-        .payment-methods input[type="radio"] {
-            display: none;
-        }
+        .payment-methods input[type="radio"] { display: none; }
 
         .payment-label {
             text-align: center;
@@ -161,7 +159,6 @@
             transition: all 0.2s;
         }
 
-        /* Active State Payment */
         .payment-methods input[type="radio"]:checked + .payment-label {
             background-color: var(--primary);
             color: #ffffff;
@@ -173,12 +170,12 @@
             justify-content: center;
             align-items: center;
             gap: 6px;
-            background-color: #161e2e; /* Khusus split payment agak biru gelap */
+            background-color: #161e2e;
             border-color: #1f2937;
             color: var(--primary);
         }
 
-        /* --- Quick Amounts (4 Kolom) --- */
+        /* --- Quick Amounts --- */
         .quick-amounts {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -198,16 +195,10 @@
             transition: background-color 0.2s;
         }
 
-        .btn-quick:active {
-            background-color: var(--border);
-        }
+        .btn-quick:active { background-color: var(--border); }
+        .btn-clear { color: var(--danger); background-color: #2a1a1c; }
 
-        .btn-clear {
-            color: var(--danger);
-            background-color: #2a1a1c; /* Aksen merah sangat gelap untuk C */
-        }
-
-        /* --- Summary Section (Bawah) --- */
+        /* --- Summary Section --- */
         .summary-section {
             padding: 20px;
             border-top: 1px solid var(--border);
@@ -222,17 +213,8 @@
             margin-bottom: 16px;
         }
 
-        .total-label {
-            font-size: 1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-
-        .total-value {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
+        .total-label { font-size: 1rem; font-weight: 800; text-transform: uppercase; }
+        .total-value { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
 
         .status-box {
             display: flex;
@@ -244,16 +226,8 @@
             border-radius: 8px;
         }
 
-        .status-label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .status-result {
-            font-size: 1.25rem;
-            font-weight: 700;
-        }
+        .status-label { font-size: 0.9rem; font-weight: 600; color: var(--text-muted); }
+        .status-result { font-size: 1rem; font-weight: 700; text-align: right; } /* Ukuran sedikit dikecilkan agar muat teks split panjang */
 
         .text-green { color: var(--success); }
         .text-red { color: var(--danger); }
@@ -271,33 +245,124 @@
             margin-top: 16px;
             cursor: pointer;
         }
-        
-        .btn-reset:active {
-            background-color: var(--border);
+        .btn-reset:active { background-color: var(--border); }
+
+        /* --- Split Payment Modal --- */
+        .modal-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: none; /* Default Hidden */
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 20px;
         }
+
+        .modal-overlay.active { display: flex; }
+
+        .modal-content {
+            width: 100%;
+            background-color: var(--modal-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 16px;
+            margin-bottom: 4px;
+        }
+
+        .modal-title { font-weight: 800; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; color: var(--text-main); }
+        .modal-title-icon { color: var(--primary); }
+        .modal-total { font-weight: 800; font-size: 1.25rem; color: var(--primary); }
+
+        .split-box {
+            background-color: transparent;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .split-box label { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; display: block;}
+        
+        .split-inputs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .split-select {
+            width: 35%;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .split-input {
+            width: 65%;
+            background-color: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 6px;
+            outline: none;
+        }
+
+        .split-input:focus { border-color: var(--primary); }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+
+        .modal-actions button {
+            flex: 1;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-modal-cancel { background-color: var(--btn-bg); color: var(--text-main); }
+        .btn-modal-apply { background-color: var(--primary); color: white; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
-        <!-- Header -->
         <header>
             <div class="header-title">
                 <h1>Kasir Pintar</h1>
-                <span>v1.1.0</span>
+                <span>v1.2.0</span>
             </div>
             <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">☀️</button>
         </header>
 
-        <!-- Main Content -->
         <main>
-            <!-- Input Total Belanja -->
             <div class="form-group">
                 <label>Total Belanja</label>
-                <input type="text" id="totalBelanja" class="input-box" inputmode="numeric" placeholder="0" oninput="formatInput(this); calculate()">
+                <input type="text" id="totalBelanja" class="input-box" inputmode="numeric" placeholder="0" oninput="formatInput(this); handleMainInput(); calculate()">
             </div>
 
-            <!-- Metode Pembayaran (Redesain) -->
             <div class="payment-methods">
                 <div class="payment-row">
                     <div>
@@ -312,22 +377,19 @@
                 <div>
                     <input type="radio" id="paySplit" name="payment" value="Split" onchange="handlePaymentChange()">
                     <label for="paySplit" class="payment-label split-label" style="display:flex;">
-                        <span>🔀</span> Split Payment
+                        <span style="font-size:1.1rem;">🔀</span> Split Payment
                     </label>
                 </div>
             </div>
 
-            <!-- Area Input Uang Diterima -->
             <div class="form-group" style="margin-top: 10px;">
-                <input type="text" id="uangDiterima" class="input-box" inputmode="numeric" placeholder="0" oninput="formatInput(this); calculate()">
+                <input type="text" id="uangDiterima" class="input-box" inputmode="numeric" placeholder="Uang Diterima (Rp)" oninput="formatInput(this); handleMainInput(); calculate()">
                 
-                <!-- Quick Amounts 4 Kolom -->
                 <div class="quick-amounts">
                     <button class="btn-quick" onclick="setQuickAmount('pas')">Uang Pas</button>
                     <button class="btn-quick" onclick="setQuickAmount(5000)">5K</button>
                     <button class="btn-quick" onclick="setQuickAmount(10000)">10K</button>
                     <button class="btn-quick" onclick="setQuickAmount(20000)">20K</button>
-                    
                     <button class="btn-quick" onclick="setQuickAmount(50000)">50K</button>
                     <button class="btn-quick" onclick="setQuickAmount(75000)">75K</button>
                     <button class="btn-quick" onclick="setQuickAmount(100000)">100K</button>
@@ -336,28 +398,59 @@
             </div>
         </main>
 
-        <!-- Summary Section Sesuai Gambar -->
         <div class="summary-section">
             <div class="total-row">
                 <span class="total-label">TOTAL</span>
                 <span class="total-value" id="displayTotal">Rp 0</span>
             </div>
-
             <div class="status-box">
                 <span class="status-label">Status</span>
                 <span class="status-result text-neutral" id="statusResult">-</span>
             </div>
-
             <button class="btn-reset" onclick="resetForm()">Reset Transaksi</button>
+        </div>
+
+        <div id="splitModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title"><span class="modal-title-icon">🔀</span> SPLIT PAYMENT</div>
+                    <div class="modal-total" id="modalTotalDisplay">Rp 0</div>
+                </div>
+
+                <div class="split-box">
+                    <label>Pembayaran Pertama</label>
+                    <div class="split-inputs">
+                        <select id="splitMethod1" class="split-select">
+                            <option value="Tunai">Tunai</option>
+                            <option value="QRIS">QRIS</option>
+                        </select>
+                        <input type="text" id="splitAmount1" class="split-input" inputmode="numeric" placeholder="0" oninput="formatInput(this)">
+                    </div>
+                </div>
+
+                <div class="split-box">
+                    <label>Pembayaran Kedua</label>
+                    <div class="split-inputs">
+                        <select id="splitMethod2" class="split-select">
+                            <option value="QRIS" selected>QRIS</option>
+                            <option value="Tunai">Tunai</option>
+                        </select>
+                        <input type="text" id="splitAmount2" class="split-input" inputmode="numeric" placeholder="0" oninput="formatInput(this)">
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-modal-cancel" onclick="closeSplitModal(true)">Batal</button>
+                    <button class="btn-modal-apply" onclick="applySplit()">Terapkan Split</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Script Logika -->
     <script>
         // --- Tema Setup ---
         const html = document.documentElement;
         const themeToggleBtn = document.getElementById('themeToggle');
-        
         const savedTheme = localStorage.getItem('theme') || 'dark';
         html.setAttribute('data-theme', savedTheme);
         updateThemeIcon(savedTheme);
@@ -374,54 +467,122 @@
             themeToggleBtn.innerText = theme === 'dark' ? '☀️' : '🌙';
         }
 
-        // --- Logika Kasir ---
+        // --- DOM Elements ---
         const inputTotal = document.getElementById('totalBelanja');
         const inputTerima = document.getElementById('uangDiterima');
         const displayTotal = document.getElementById('displayTotal');
         const statusResult = document.getElementById('statusResult');
+        
+        // Modal Elements
+        const modalOverlay = document.getElementById('splitModal');
+        const modalTotalDisplay = document.getElementById('modalTotalDisplay');
+        const splitAmount1 = document.getElementById('splitAmount1');
+        const splitAmount2 = document.getElementById('splitAmount2');
+        const splitMethod1 = document.getElementById('splitMethod1');
+        const splitMethod2 = document.getElementById('splitMethod2');
 
+        // State Global
+        let isSplitActive = false;
+        let splitData = { m1: '', v1: 0, m2: '', v2: 0 };
+
+        // --- Utilities ---
         function formatInput(input) {
             let value = input.value.replace(/[^0-9]/g, '');
-            if (value !== '') {
-                input.value = parseInt(value, 10).toLocaleString('id-ID');
-            } else {
-                input.value = '';
-            }
+            input.value = value !== '' ? parseInt(value, 10).toLocaleString('id-ID') : '';
         }
 
         function getRawValue(str) {
-            if (!str) return 0;
-            return parseInt(str.replace(/[^0-9]/g, ''), 10) || 0;
+            return str ? parseInt(str.replace(/[^0-9]/g, ''), 10) || 0 : 0;
         }
 
+        // --- Logic Interaksi ---
         function handlePaymentChange() {
             const method = document.querySelector('input[name="payment"]:checked').value;
-            if (method === 'QRIS') {
-                setQuickAmount('pas');
+            if (method === 'Split') {
+                openSplitModal();
+            } else {
+                isSplitActive = false; // Matikan status split jika ganti ke Tunai/QRIS
+                if (method === 'QRIS') setQuickAmount('pas');
+                else calculate();
             }
         }
 
-        function setQuickAmount(amount) {
-            let total = getRawValue(inputTotal.value);
-            
-            if (amount === 'pas') {
-                inputTerima.value = total.toLocaleString('id-ID');
-            } else {
-                inputTerima.value = amount.toLocaleString('id-ID');
+        // Jika user mengetik manual di input Total/Terima, nonaktifkan mode Split
+        function handleMainInput() {
+            if (isSplitActive) {
+                isSplitActive = false;
+                document.getElementById('payTunai').checked = true;
             }
+        }
+
+        // Quick Amounts
+        function setQuickAmount(amount) {
+            handleMainInput(); // Reset split jika pakai quick amount
+            let total = getRawValue(inputTotal.value);
+            inputTerima.value = amount === 'pas' ? total.toLocaleString('id-ID') : amount.toLocaleString('id-ID');
             calculate();
         }
 
         function clearTerima() {
             inputTerima.value = '';
+            handleMainInput();
             calculate();
         }
 
+        // --- Logic Split Modal ---
+        function openSplitModal() {
+            const total = getRawValue(inputTotal.value);
+            modalTotalDisplay.innerText = "Rp " + total.toLocaleString('id-ID');
+            
+            // Auto-fill setengah-setengah (Opsional, mempermudah kasir)
+            let half = Math.floor(total / 2);
+            let remainder = total - half;
+            splitAmount1.value = half > 0 ? half.toLocaleString('id-ID') : '';
+            splitAmount2.value = remainder > 0 ? remainder.toLocaleString('id-ID') : '';
+
+            modalOverlay.classList.add('active');
+        }
+
+        function closeSplitModal(isCancel = false) {
+            modalOverlay.classList.remove('active');
+            if (isCancel) {
+                // Jika batal, kembalikan pilihan ke Tunai
+                document.getElementById('payTunai').checked = true;
+                isSplitActive = false;
+                calculate();
+            }
+        }
+
+        function applySplit() {
+            const v1 = getRawValue(splitAmount1.value);
+            const v2 = getRawValue(splitAmount2.value);
+            const total = getRawValue(inputTotal.value);
+
+            // Validasi (Bisa dihilangkan jika ingin kasir bisa input bebas, tapi umumnya split = lunas)
+            if (v1 + v2 < total && total > 0) {
+                alert("Total split pembayaran masih kurang dari Total Belanja!");
+                return;
+            }
+
+            isSplitActive = true;
+            splitData = {
+                m1: splitMethod1.value,
+                v1: v1,
+                m2: splitMethod2.value,
+                v2: v2
+            };
+            
+            // Set Uang Diterima di background agar selaras
+            inputTerima.value = (v1 + v2).toLocaleString('id-ID');
+            
+            closeSplitModal();
+            calculate();
+        }
+
+        // --- Kalkulasi Utama ---
         function calculate() {
             const total = getRawValue(inputTotal.value);
             const terima = getRawValue(inputTerima.value);
-            
-            // Update UI Teks Biru Total
             displayTotal.innerText = "Rp " + total.toLocaleString('id-ID');
 
             if (total === 0 && terima === 0) {
@@ -429,6 +590,14 @@
                 return;
             }
 
+            // Jika Mode Split Aktif
+            if (isSplitActive) {
+                statusResult.innerText = `Split: ${splitData.m1} (Rp ${splitData.v1.toLocaleString('id-ID')}) + ${splitData.m2} (Rp ${splitData.v2.toLocaleString('id-ID')})`;
+                statusResult.className = "status-result text-green";
+                return;
+            }
+
+            // Jika Mode Normal (Tunai/QRIS)
             if (terima === 0) {
                 statusResult.innerText = "-";
                 statusResult.className = "status-result text-neutral";
@@ -436,7 +605,6 @@
             }
 
             const selisih = terima - total;
-
             if (selisih >= 0) {
                 statusResult.innerText = "Kembali: Rp " + selisih.toLocaleString('id-ID');
                 statusResult.className = "status-result text-green";
@@ -456,6 +624,7 @@
             inputTotal.value = '';
             inputTerima.value = '';
             document.getElementById('payTunai').checked = true;
+            isSplitActive = false;
             resetSummary();
         }
     </script>
