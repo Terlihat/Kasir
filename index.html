@@ -3,152 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kasir Pintar v2.0.0</title>
+    <title>Kasir Pintar</title>
+    
+    <link rel="manifest" href="./manifest.json">
+    <meta name="theme-color" content="#121212">
+    <link rel="apple-touch-icon" href="./icon-192.png">
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
     
     <style>
         /* =========================================
            1. CSS VARIABLES (TEMA)
         ========================================= */
-        /* --- KELOMPOK MODE GELAP --- */
-        [data-theme="dark-default"] {
-            --bg-color: #121212; --surface-color: #1e1e1e; --text-main: #f1f5f9; --text-muted: #94a3b8;
-            --primary: #3b82f6; --primary-hover: #2563eb; --success: #10b981; --danger: #ef4444;
-            --border: #334155; --btn-bg: #2d3748; --btn-text: #e2e8f0; --status-bg: #18181b; --nav-bg: #1e1e1e;
-        }
-        [data-theme="dark-ocean"] {
-            --bg-color: #0f172a; --surface-color: #1e293b; --text-main: #f8fafc; --text-muted: #94a3b8;
-            --primary: #0ea5e9; --primary-hover: #0284c7; --success: #10b981; --danger: #ef4444;
-            --border: #334155; --btn-bg: #334155; --btn-text: #e2e8f0; --status-bg: #0f172a; --nav-bg: #1e293b;
-        }
-        [data-theme="dark-sapphire"] {
-            --bg-color: #020617; --surface-color: #0f172a; --text-main: #f8fafc; --text-muted: #94a3b8;
-            --primary: #4f46e5; --primary-hover: #4338ca; --success: #10b981; --danger: #ef4444;
-            --border: #1e293b; --btn-bg: #1e293b; --btn-text: #e2e8f0; --status-bg: #020617; --nav-bg: #0f172a;
-        }
-        [data-theme="dark-lavender"] {
-            --bg-color: #1e1b4b; --surface-color: #2e1065; --text-main: #f3e8ff; --text-muted: #c4b5fd;
-            --primary: #8b5cf6; --primary-hover: #7c3aed; --success: #10b981; --danger: #ef4444;
-            --border: #4c1d95; --btn-bg: #4c1d95; --btn-text: #f3e8ff; --status-bg: #1e1b4b; --nav-bg: #2e1065;
-        }
-        [data-theme="dark-permen"] {
-            --bg-color: #311024; --surface-color: #500724; --text-main: #fce7f3; --text-muted: #f472b6;
-            --primary: #ec4899; --primary-hover: #db2777; --success: #10b981; --danger: #ef4444;
-            --border: #831843; --btn-bg: #831843; --btn-text: #fce7f3; --status-bg: #311024; --nav-bg: #500724;
-        }
-        [data-theme="dark-sunset"] {
-            --bg-color: #2a0a0a; --surface-color: #450a0a; --text-main: #ffedd5; --text-muted: #fdba74;
-            --primary: #f97316; --primary-hover: #ea580c; --success: #10b981; --danger: #ef4444;
-            --border: #7f1d1d; --btn-bg: #7f1d1d; --btn-text: #ffedd5; --status-bg: #2a0a0a; --nav-bg: #450a0a;
-        }
-        [data-theme="dark-rosegold"] {
-            --bg-color: #292524; --surface-color: #44403c; --text-main: #ffe4e6; --text-muted: #fda4af;
-            --primary: #f43f5e; --primary-hover: #e11d48; --success: #10b981; --danger: #ef4444;
-            --border: #57534e; --btn-bg: #57534e; --btn-text: #ffe4e6; --status-bg: #292524; --nav-bg: #44403c;
-        }
+        [data-theme="dark-default"] { --bg-color: #121212; --surface-color: #1e1e1e; --text-main: #f1f5f9; --text-muted: #94a3b8; --primary: #3b82f6; --primary-hover: #2563eb; --success: #10b981; --danger: #ef4444; --border: #334155; --btn-bg: #2d3748; --btn-text: #e2e8f0; --status-bg: #18181b; --nav-bg: #1e1e1e; }
+        [data-theme="dark-ocean"] { --bg-color: #0f172a; --surface-color: #1e293b; --text-main: #f8fafc; --text-muted: #94a3b8; --primary: #0ea5e9; --primary-hover: #0284c7; --success: #10b981; --danger: #ef4444; --border: #334155; --btn-bg: #334155; --btn-text: #e2e8f0; --status-bg: #0f172a; --nav-bg: #1e293b; }
+        [data-theme="dark-sapphire"] { --bg-color: #020617; --surface-color: #0f172a; --text-main: #f8fafc; --text-muted: #94a3b8; --primary: #4f46e5; --primary-hover: #4338ca; --success: #10b981; --danger: #ef4444; --border: #1e293b; --btn-bg: #1e293b; --btn-text: #e2e8f0; --status-bg: #020617; --nav-bg: #0f172a; }
+        [data-theme="dark-lavender"] { --bg-color: #1e1b4b; --surface-color: #2e1065; --text-main: #f3e8ff; --text-muted: #c4b5fd; --primary: #8b5cf6; --primary-hover: #7c3aed; --success: #10b981; --danger: #ef4444; --border: #4c1d95; --btn-bg: #4c1d95; --btn-text: #f3e8ff; --status-bg: #1e1b4b; --nav-bg: #2e1065; }
+        [data-theme="dark-permen"] { --bg-color: #311024; --surface-color: #500724; --text-main: #fce7f3; --text-muted: #f472b6; --primary: #ec4899; --primary-hover: #db2777; --success: #10b981; --danger: #ef4444; --border: #831843; --btn-bg: #831843; --btn-text: #fce7f3; --status-bg: #311024; --nav-bg: #500724; }
+        [data-theme="dark-sunset"] { --bg-color: #2a0a0a; --surface-color: #450a0a; --text-main: #ffedd5; --text-muted: #fdba74; --primary: #f97316; --primary-hover: #ea580c; --success: #10b981; --danger: #ef4444; --border: #7f1d1d; --btn-bg: #7f1d1d; --btn-text: #ffedd5; --status-bg: #2a0a0a; --nav-bg: #450a0a; }
+        [data-theme="dark-rosegold"] { --bg-color: #292524; --surface-color: #44403c; --text-main: #ffe4e6; --text-muted: #fda4af; --primary: #f43f5e; --primary-hover: #e11d48; --success: #10b981; --danger: #ef4444; --border: #57534e; --btn-bg: #57534e; --btn-text: #ffe4e6; --status-bg: #292524; --nav-bg: #44403c; }
+        /* TEMA BARU: NEON */
+        [data-theme="dark-neon"] { --bg-color: #050505; --surface-color: #111111; --text-main: #ffffff; --text-muted: #a3a3a3; --primary: #00ffff; --primary-hover: #00cccc; --success: #39ff14; --danger: #ff007f; --border: #222222; --btn-bg: #1a1a1a; --btn-text: #ffffff; --status-bg: #000000; --nav-bg: #0a0a0a; }
 
-        /* --- KELOMPOK MODE TERANG --- */
-        [data-theme="light-nordic"] {
-            --bg-color: #f8fafc; --surface-color: #ffffff; --text-main: #334155; --text-muted: #64748b;
-            --primary: #64748b; --primary-hover: #475569; --success: #059669; --danger: #dc2626;
-            --border: #e2e8f0; --btn-bg: #f1f5f9; --btn-text: #334155; --status-bg: #f8fafc; --nav-bg: #ffffff;
-        }
-        [data-theme="light-citrus"] {
-            --bg-color: #fffbeb; --surface-color: #ffffff; --text-main: #78350f; --text-muted: #b45309;
-            --primary: #f59e0b; --primary-hover: #d97706; --success: #059669; --danger: #dc2626;
-            --border: #fde68a; --btn-bg: #fef3c7; --btn-text: #78350f; --status-bg: #fffbeb; --nav-bg: #ffffff;
-        }
-        [data-theme="light-cottoncandy"] {
-            --bg-color: #fdf2f8; --surface-color: #ffffff; --text-main: #831843; --text-muted: #db2777;
-            --primary: #ec4899; --primary-hover: #db2777; --success: #059669; --danger: #dc2626;
-            --border: #fbcfe8; --btn-bg: #fce7f3; --btn-text: #831843; --status-bg: #fdf2f8; --nav-bg: #ffffff;
-        }
-        [data-theme="light-mint"] {
-            --bg-color: #f0fdf4; --surface-color: #ffffff; --text-main: #064e3b; --text-muted: #059669;
-            --primary: #10b981; --primary-hover: #059669; --success: #059669; --danger: #dc2626;
-            --border: #a7f3d0; --btn-bg: #d1fae5; --btn-text: #064e3b; --status-bg: #f0fdf4; --nav-bg: #ffffff;
-        }
+        [data-theme="light-nordic"] { --bg-color: #f8fafc; --surface-color: #ffffff; --text-main: #334155; --text-muted: #64748b; --primary: #64748b; --primary-hover: #475569; --success: #059669; --danger: #dc2626; --border: #e2e8f0; --btn-bg: #f1f5f9; --btn-text: #334155; --status-bg: #f8fafc; --nav-bg: #ffffff; }
+        [data-theme="light-citrus"] { --bg-color: #fffbeb; --surface-color: #ffffff; --text-main: #78350f; --text-muted: #b45309; --primary: #f59e0b; --primary-hover: #d97706; --success: #059669; --danger: #dc2626; --border: #fde68a; --btn-bg: #fef3c7; --btn-text: #78350f; --status-bg: #fffbeb; --nav-bg: #ffffff; }
+        [data-theme="light-cottoncandy"] { --bg-color: #fdf2f8; --surface-color: #ffffff; --text-main: #831843; --text-muted: #db2777; --primary: #ec4899; --primary-hover: #db2777; --success: #059669; --danger: #dc2626; --border: #fbcfe8; --btn-bg: #fce7f3; --btn-text: #831843; --status-bg: #fdf2f8; --nav-bg: #ffffff; }
+        [data-theme="light-mint"] { --bg-color: #f0fdf4; --surface-color: #ffffff; --text-main: #064e3b; --text-muted: #059669; --primary: #10b981; --primary-hover: #059669; --success: #059669; --danger: #dc2626; --border: #a7f3d0; --btn-bg: #d1fae5; --btn-text: #064e3b; --status-bg: #f0fdf4; --nav-bg: #ffffff; }
 
         /* =========================================
-           2. BASE STYLES & LAYOUT NATIVE
+           2. BASE STYLES & LAYOUT
         ========================================= */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
-        ::-webkit-scrollbar { display: none; }
-        * { -ms-overflow-style: none; scrollbar-width: none; }
+        ::-webkit-scrollbar { display: none; } * { -ms-overflow-style: none; scrollbar-width: none; }
+        body { background-color: var(--bg-color); color: var(--text-main); display: flex; justify-content: center; overflow: hidden; overscroll-behavior-y: none; transition: background-color 0.3s, color 0.3s; }
+        .app-container { width: 100%; max-width: 480px; height: 100vh; height: 100dvh; background-color: var(--surface-color); display: flex; flex-direction: column; position: relative; overflow: hidden; }
 
-        body {
-            background-color: var(--bg-color); color: var(--text-main);
-            display: flex; justify-content: center; overflow: hidden; overscroll-behavior-y: none;
-            transition: background-color 0.3s, color 0.3s;
-        }
+        header { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; background-color: var(--surface-color); border-bottom: 1px solid var(--border); flex-shrink: 0; z-index: 10; }
+        .header-spacer { width: 32px; } 
+        .header-title { text-align: center; flex: 1; } .header-title h1 { font-size: 1.15rem; font-weight: 800; }
+        .btn-menu-dots { background: none; border: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer; width: 32px; height: 32px; display: flex; justify-content: flex-end; align-items: center; }
 
-        /* Container Aplikasi Kunci Layar (100vh) */
-        .app-container {
-            width: 100%; max-width: 480px; height: 100vh; height: 100dvh;
-            background-color: var(--surface-color); display: flex; flex-direction: column;
-            position: relative; overflow: hidden;
-        }
+        main { flex: 1; position: relative; overflow: hidden; background-color: var(--bg-color); }
+        .tab-pane { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; opacity: 0; transition: opacity 0.2s ease; }
+        .tab-pane.active { display: flex; opacity: 1; }
 
-        /* Header */
-        header {
-            padding: 16px 20px; display: flex; justify-content: center; align-items: center;
-            background-color: var(--surface-color); border-bottom: 1px solid var(--border); flex-shrink: 0; z-index: 10;
-        }
-        .header-title { text-align: center; }
-        .header-title h1 { font-size: 1.1rem; font-weight: 800; }
-        .header-title span { font-size: 0.75rem; color: var(--text-muted); }
-
-        /* Main Viewport untuk Tab */
-        main {
-            flex: 1; position: relative; overflow: hidden; background-color: var(--bg-color);
-        }
-
-        .tab-pane {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            display: none; flex-direction: column; opacity: 0; transition: opacity 0.2s ease;
-        }
-        .tab-pane.active {
-            display: flex; opacity: 1;
-        }
-
-        /* =========================================
-           3. TAB KASIR (NO SCROLL)
-        ========================================= */
+        /* TAB KASIR */
         #tab-kasir { padding: 12px 16px; justify-content: space-between; overflow: hidden; }
-        
         .form-group label { display: block; font-size: 0.75rem; margin-bottom: 6px; color: var(--text-muted); font-weight: 800; text-transform: uppercase; }
-        .input-box {
-            width: 100%; background-color: var(--surface-color); border: 2px solid transparent;
-            color: var(--text-main); padding: 12px 16px; font-size: 1.25rem; font-weight: bold;
-            border-radius: 10px; outline: none; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-        .input-box:focus { border-color: var(--primary); }
-        .input-box::placeholder { color: var(--text-muted); font-weight: 600; font-size: 1rem; }
+        .input-box { width: 100%; background-color: var(--surface-color); border: 2px solid transparent; color: var(--text-main); padding: 12px 16px; font-size: 1.25rem; font-weight: bold; border-radius: 10px; outline: none; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .input-box:focus { border-color: var(--primary); } .input-box::placeholder { color: var(--text-muted); font-weight: 600; font-size: 1rem; }
 
         .payment-methods { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
         .payment-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .payment-methods input[type="radio"] { display: none; }
-        .payment-label {
-            text-align: center; padding: 12px 8px; background-color: var(--surface-color);
-            color: var(--text-main); border: 2px solid transparent; border-radius: 10px;
-            font-size: 0.85rem; font-weight: 800; cursor: pointer; transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
+        .payment-label { text-align: center; padding: 12px 8px; background-color: var(--surface-color); color: var(--text-main); border: 2px solid transparent; border-radius: 10px; font-size: 0.85rem; font-weight: 800; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .payment-methods input[type="radio"]:checked + .payment-label { background-color: var(--primary); color: #ffffff; }
 
         .quick-amounts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 8px; }
-        .btn-quick {
-            background-color: var(--surface-color); color: var(--text-main); border: none;
-            padding: 10px 0; border-radius: 8px; font-weight: 800; font-size: 0.8rem;
-            cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
+        .btn-quick { background-color: var(--surface-color); color: var(--text-main); border: none; padding: 10px 0; border-radius: 8px; font-weight: 800; font-size: 0.8rem; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .btn-quick:active { transform: scale(0.95); background-color: var(--border); }
         .btn-clear { color: var(--danger); background-color: var(--surface-color); }
 
-        .summary-section {
-            background-color: var(--surface-color); padding: 16px; border-radius: 16px;
-            margin-top: auto; box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
-        }
+        .summary-section { background-color: var(--surface-color); padding: 16px; border-radius: 16px; margin-top: auto; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); }
         .total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
         .total-label { font-size: 0.9rem; font-weight: 800; color: var(--text-muted); }
         .total-value { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
@@ -159,24 +74,17 @@
         .text-green { color: var(--success); } .text-red { color: var(--danger); } .text-neutral { color: var(--text-muted); }
 
         .action-buttons { display: flex; gap: 8px; }
-        .btn-action {
-            flex: 1; padding: 14px; border-radius: 10px; font-size: 0.9rem;
-            font-weight: 800; cursor: pointer; border: none;
-        }
+        .btn-action { flex: 1; padding: 14px; border-radius: 10px; font-size: 0.9rem; font-weight: 800; cursor: pointer; border: none; }
         .btn-save { background-color: var(--success); color: #ffffff; }
         .btn-save:disabled { background-color: var(--btn-bg); color: var(--text-muted); }
         .btn-reset { background-color: var(--btn-bg); color: var(--text-muted); flex: 0.4; }
 
-        /* =========================================
-           4. TAB RIWAYAT (BISA SCROLL)
-        ========================================= */
+        /* TAB RIWAYAT */
         #tab-riwayat { overflow-y: auto; padding: 20px; }
-        
         .report-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
         .report-card { background-color: var(--surface-color); padding: 16px 10px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .card-label { display: block; font-size: 0.65rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-bottom: 6px; }
         .card-value { font-size: 0.95rem; font-weight: 800; }
-
         .history-label { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 10px; display: block; }
         .history-list { display: flex; flex-direction: column; gap: 10px; }
         .history-item { display: flex; justify-content: space-between; align-items: center; padding: 14px; background-color: var(--surface-color); border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
@@ -184,56 +92,31 @@
         .item-time { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; }
         .item-method { font-size: 0.7rem; font-weight: 800; color: var(--primary); background-color: var(--status-bg); padding: 4px 8px; border-radius: 6px; align-self: flex-start; }
         .item-amount { font-weight: 800; font-size: 1rem; }
+        .btn-clear-history { width: 100%; background-color: var(--surface-color); color: var(--danger); border: 2px solid var(--border); padding: 14px; font-size: 0.85rem; font-weight: 800; border-radius: 12px; margin-top: 20px; cursor: pointer; }
 
-        .btn-clear-history {
-            width: 100%; background-color: var(--surface-color); color: var(--danger); border: 2px solid var(--border);
-            padding: 14px; font-size: 0.85rem; font-weight: 800; border-radius: 12px; margin-top: 20px; cursor: pointer;
-        }
-
-        /* =========================================
-           5. TAB TAMPILAN (TEMA)
-        ========================================= */
+        /* TAB TAMPILAN */
         #tab-tampilan { overflow-y: auto; padding: 20px; }
         .theme-section-title { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; margin-top: 10px; }
-        
         .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
-        .theme-btn {
-            background-color: var(--surface-color); border: 2px solid transparent; color: var(--text-main);
-            padding: 16px; border-radius: 12px; font-size: 0.85rem; font-weight: 800;
-            text-align: left; cursor: pointer; display: flex; align-items: center; gap: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: all 0.2s;
-        }
+        .theme-btn { background-color: var(--surface-color); border: 2px solid transparent; color: var(--text-main); padding: 16px; border-radius: 12px; font-size: 0.85rem; font-weight: 800; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: all 0.2s; }
         .theme-btn.active { border-color: var(--primary); background-color: var(--status-bg); }
         .theme-color-preview { width: 16px; height: 16px; border-radius: 50%; display: inline-block; }
+        /* Style Spesial Untuk Dot Neon */
+        [data-theme="dark-neon"] .theme-btn.active { box-shadow: 0 0 10px rgba(0,255,255,0.3); }
 
-        /* =========================================
-           6. BOTTOM NAVIGATION BAR
-        ========================================= */
-        .bottom-nav {
-            display: flex; background-color: var(--nav-bg); border-top: 1px solid var(--border);
-            height: 65px; flex-shrink: 0; padding-bottom: max(0px, env(safe-area-inset-bottom)); /* Support iOS Notch */
-        }
-        .nav-item {
-            flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
-            background: none; border: none; color: var(--text-muted); cursor: pointer; gap: 4px; transition: color 0.2s;
-        }
+        /* BOTTOM NAV */
+        .bottom-nav { display: flex; background-color: var(--nav-bg); border-top: 1px solid var(--border); height: 65px; flex-shrink: 0; padding-bottom: max(0px, env(safe-area-inset-bottom)); }
+        .nav-item { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; background: none; border: none; color: var(--text-muted); cursor: pointer; gap: 4px; transition: color 0.2s; }
         .nav-item.active { color: var(--primary); }
         .nav-icon { font-size: 1.25rem; }
         .nav-text { font-size: 0.7rem; font-weight: 800; }
 
-        /* =========================================
-           7. MODAL SPLIT PAYMENT
-        ========================================= */
-        .modal-overlay {
-            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px);
-            display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px;
-        }
+        /* MODAL OVERLAY DASAR */
+        .modal-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px; }
         .modal-overlay.active { display: flex; }
-        .modal-content {
-            width: 100%; background-color: var(--surface-color); border-radius: 16px; padding: 20px;
-            display: flex; flex-direction: column; gap: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        }
+
+        /* Modal Split Payment */
+        .modal-content { width: 100%; background-color: var(--surface-color); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
         .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
         .modal-title { font-weight: 800; font-size: 0.95rem; }
         .modal-total { font-weight: 800; font-size: 1.2rem; color: var(--primary); }
@@ -246,16 +129,37 @@
         .modal-actions button { flex: 1; padding: 14px; border-radius: 10px; font-weight: 800; font-size: 0.9rem; cursor: pointer; border: none; }
         .btn-modal-cancel { background-color: var(--btn-bg); color: var(--text-main); }
         .btn-modal-apply { background-color: var(--primary); color: white; }
+
+        /* BOTTOM SHEET (INFO AUTHOR) */
+        .bottom-sheet-container {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            background-color: var(--surface-color); border-radius: 24px 24px 0 0;
+            padding: 10px 24px 30px 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
+            transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 101; display: flex; flex-direction: column; align-items: center;
+        }
+        .modal-overlay.sheet-active .bottom-sheet-container { transform: translateY(0); }
+        .drag-handle { width: 40px; height: 5px; background-color: var(--border); border-radius: 5px; margin: 0 auto 20px auto; }
+        .sheet-logo { font-size: 2.5rem; margin-bottom: 10px; }
+        .sheet-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; color: var(--text-main); }
+        .sheet-version { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); background-color: var(--btn-bg); padding: 4px 10px; border-radius: 12px; margin-bottom: 24px; }
+        .sheet-author { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; }
+        .sheet-author span { font-weight: 800; color: var(--primary); }
+        .social-icons { display: flex; gap: 16px; }
+        .social-btn { width: 44px; height: 44px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; transition: transform 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .social-btn:active { transform: scale(0.9); }
+        .social-btn svg { width: 22px; height: 22px; fill: white; }
     </style>
 </head>
 <body>
 
     <div class="app-container">
         <header>
+            <div class="header-spacer"></div>
             <div class="header-title">
                 <h1>Kasir Pintar</h1>
-                <span>v2.0.0 (Ultimate Editon)</span>
             </div>
+            <button class="btn-menu-dots" onclick="openAboutSheet()">⋮</button>
         </header>
 
         <main>
@@ -332,11 +236,8 @@
                         <span class="card-value" id="omzetQris">Rp 0</span>
                     </div>
                 </div>
-                
                 <span class="history-label">Daftar Transaksi Hari Ini</span>
-                <div class="history-list" id="historyList">
-                    </div>
-
+                <div class="history-list" id="historyList"></div>
                 <button class="btn-clear-history" onclick="clearHistory()">Kosongkan Pembukuan</button>
             </div>
 
@@ -344,6 +245,7 @@
                 <div class="theme-section-title">Mode Gelap (Dark)</div>
                 <div class="theme-grid">
                     <button class="theme-btn" onclick="setTheme('dark-default')"><span class="theme-color-preview" style="background:#121212; border:1px solid #333;"></span> Default</button>
+                    <button class="theme-btn" onclick="setTheme('dark-neon')"><span class="theme-color-preview" style="background:#00ffff; box-shadow: 0 0 8px #00ffff;"></span> Neon</button>
                     <button class="theme-btn" onclick="setTheme('dark-ocean')"><span class="theme-color-preview" style="background:#0ea5e9;"></span> Ocean</button>
                     <button class="theme-btn" onclick="setTheme('dark-sapphire')"><span class="theme-color-preview" style="background:#4f46e5;"></span> Sapphire</button>
                     <button class="theme-btn" onclick="setTheme('dark-lavender')"><span class="theme-color-preview" style="background:#8b5cf6;"></span> Lavender</button>
@@ -364,15 +266,15 @@
 
         <nav class="bottom-nav">
             <button class="nav-item active" id="nav-kasir" onclick="switchTab('kasir')">
-                <span class="nav-icon">🛒</span>
+                <i class="fa-solid fa-cart-shopping"></i>
                 <span class="nav-text">Kasir</span>
             </button>
             <button class="nav-item" id="nav-riwayat" onclick="switchTab('riwayat')">
-                <span class="nav-icon">📓</span>
+                <i class="fas-solid fa-history"></i>
                 <span class="nav-text">Riwayat</span>
             </button>
             <button class="nav-item" id="nav-tampilan" onclick="switchTab('tampilan')">
-                <span class="nav-icon">✨</span>
+                <i class="fa-solid fa-palette"></i>
                 <span class="nav-text">Tampilan</span>
             </button>
         </nav>
@@ -383,40 +285,61 @@
                     <div class="modal-title">🔀 SPLIT PAYMENT</div>
                     <div class="modal-total" id="modalTotalDisplay">Rp 0</div>
                 </div>
-
                 <div class="split-box">
                     <label>Pembayaran Pertama</label>
                     <div class="split-inputs">
-                        <select id="splitMethod1" class="split-select">
-                            <option value="Tunai">Tunai</option>
-                            <option value="QRIS">QRIS</option>
-                        </select>
-                        <input type="text" id="splitAmount1" class="split-input" inputmode="numeric" placeholder="0" 
-                               onfocus="removeFormat(this)" onblur="applyFormat(this)" oninput="cleanInput(this); syncSplitAmounts(1)">
+                        <select id="splitMethod1" class="split-select"><option value="Tunai">Tunai</option><option value="QRIS">QRIS</option></select>
+                        <input type="text" id="splitAmount1" class="split-input" inputmode="numeric" placeholder="0" onfocus="removeFormat(this)" onblur="applyFormat(this)" oninput="cleanInput(this); syncSplitAmounts(1)">
                     </div>
                 </div>
-
                 <div class="split-box">
                     <label>Pembayaran Kedua</label>
                     <div class="split-inputs">
-                        <select id="splitMethod2" class="split-select">
-                            <option value="QRIS" selected>QRIS</option>
-                            <option value="Tunai">Tunai</option>
-                        </select>
-                        <input type="text" id="splitAmount2" class="split-input" inputmode="numeric" placeholder="0" 
-                               onfocus="removeFormat(this)" onblur="applyFormat(this)" oninput="cleanInput(this); syncSplitAmounts(2)">
+                        <select id="splitMethod2" class="split-select"><option value="QRIS" selected>QRIS</option><option value="Tunai">Tunai</option></select>
+                        <input type="text" id="splitAmount2" class="split-input" inputmode="numeric" placeholder="0" onfocus="removeFormat(this)" onblur="applyFormat(this)" oninput="cleanInput(this); syncSplitAmounts(2)">
                     </div>
                 </div>
-
                 <div class="modal-actions">
                     <button class="btn-modal-cancel" onclick="closeSplitModal(true)">Batal</button>
                     <button class="btn-modal-apply" onclick="applySplit()">Terapkan</button>
                 </div>
             </div>
         </div>
+
+        <div id="aboutSheetOverlay" class="modal-overlay" style="align-items: flex-end; padding: 0;">
+            <div id="aboutSheet" class="bottom-sheet-container">
+                <div class="drag-handle"></div>
+                <div class="sheet-logo">💡</div>
+                <h2 class="sheet-title">Kasir Pintar</h2>
+                <div class="sheet-version">Versi 2.2.0</div>
+                
+                <p class="sheet-author">Dibuat oleh <span>Sulfikar</span></p>
+
+                <div class="social-icons">
+                    <a href="#" class="social-btn" style="background-color: #1877F2;">
+                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    </a>
+                    <a href="#" class="social-btn" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                    </a>
+                    <a href="#" class="social-btn" style="background-color: #0088cc;">
+                        <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.888-.666 3.473-1.513 5.789-2.511 6.947-2.995 3.303-1.385 3.991-1.624 4.437-1.63z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
+        // --- 0. REGISTER PWA SERVICE WORKER ---
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('PWA Service Worker terdaftar!', reg))
+                    .catch(err => console.log('Gagal mendaftar Service Worker', err));
+            });
+        }
+
         // --- 1. SYSTEM TEMA ---
         const html = document.documentElement;
         const savedTheme = localStorage.getItem('theme_v2') || 'dark-default';
@@ -424,33 +347,55 @@
         function setTheme(themeName) {
             html.setAttribute('data-theme', themeName);
             localStorage.setItem('theme_v2', themeName);
-            
-            // Update UI tombol aktif
             document.querySelectorAll('.theme-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if(btn.getAttribute('onclick').includes(themeName)) {
-                    btn.classList.add('active');
-                }
+                if(btn.getAttribute('onclick').includes(themeName)) btn.classList.add('active');
             });
+            // Update warna PWA status bar HP
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', 
+                getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim()
+            );
         }
-        // Init theme on load
         setTheme(savedTheme);
 
-        // --- 2. SYSTEM TAB & NAVIGASI ---
+        // --- 2. SYSTEM TAB ---
         function switchTab(tabName) {
-            // Sembunyikan semua tab & matikan warna icon nav
             document.querySelectorAll('.tab-pane').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-            
-            // Tampilkan tab yang dipilih
             document.getElementById('tab-' + tabName).classList.add('active');
             document.getElementById('nav-' + tabName).classList.add('active');
-
-            // Jika buka riwayat, update datanya
             if (tabName === 'riwayat') updateReportUI();
         }
 
-        // --- 3. DOM ELEMENTS KASIR ---
+        // --- 3. BOTTOM SHEET LOGIC ---
+        const aboutOverlay = document.getElementById('aboutSheetOverlay');
+        const aboutSheet = document.getElementById('aboutSheet');
+        let sheetStartY = 0, sheetCurrentY = 0;
+
+        function openAboutSheet() {
+            aboutOverlay.style.display = 'flex';
+            setTimeout(() => aboutOverlay.classList.add('sheet-active'), 10);
+        }
+        function closeAboutSheet() {
+            aboutOverlay.classList.remove('sheet-active');
+            aboutSheet.style.transform = '';
+            setTimeout(() => { aboutOverlay.style.display = 'none'; }, 300);
+        }
+
+        aboutOverlay.addEventListener('click', (e) => { if(e.target === aboutOverlay) closeAboutSheet(); });
+        aboutSheet.addEventListener('touchstart', (e) => { sheetStartY = e.touches[0].clientY; aboutSheet.style.transition = 'none'; });
+        aboutSheet.addEventListener('touchmove', (e) => {
+            sheetCurrentY = e.touches[0].clientY;
+            let diff = sheetCurrentY - sheetStartY;
+            if (diff > 0) aboutSheet.style.transform = `translateY(${diff}px)`;
+        });
+        aboutSheet.addEventListener('touchend', (e) => {
+            let diff = sheetCurrentY - sheetStartY;
+            aboutSheet.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+            if (diff > 100) closeAboutSheet(); else aboutSheet.style.transform = 'translateY(0)';
+        });
+
+        // --- 4. DOM & STATE KASIR ---
         const inputTotal = document.getElementById('totalBelanja');
         const inputTerima = document.getElementById('uangDiterima');
         const displayTotal = document.getElementById('displayTotal');
@@ -467,7 +412,7 @@
         let splitData = { m1: '', v1: 0, m2: '', v2: 0 };
         let transactions = JSON.parse(localStorage.getItem('kasir_transactions')) || [];
 
-        // --- 4. FORMAT KEYBOARD MOBILE FIX ---
+        // --- 5. FORMAT KEYBOARD MOBILE ---
         function removeFormat(input) { input.value = input.value.replace(/[^0-9]/g, ''); }
         function cleanInput(input) { input.value = input.value.replace(/[^0-9]/g, ''); }
         function applyFormat(input) {
@@ -476,36 +421,20 @@
         }
         function getRawValue(str) { return str ? parseInt(str.replace(/[^0-9]/g, ''), 10) || 0 : 0; }
 
-        // --- 5. LOGIKA INPUT KASIR ---
+        // --- 6. LOGIKA INPUT KASIR ---
         function handlePaymentChange() {
             const method = document.querySelector('input[name="payment"]:checked').value;
             if (method === 'Split') { openSplitModal(); } 
-            else {
-                isSplitActive = false;
-                if (method === 'QRIS') setQuickAmount('pas');
-                else calculate();
-            }
+            else { isSplitActive = false; if (method === 'QRIS') setQuickAmount('pas'); else calculate(); }
         }
-
-        function handleMainInput() {
-            if (isSplitActive) {
-                isSplitActive = false;
-                document.getElementById('payTunai').checked = true;
-            }
-        }
-
+        function handleMainInput() { if (isSplitActive) { isSplitActive = false; document.getElementById('payTunai').checked = true; } }
         function setQuickAmount(amount) {
             handleMainInput();
             let total = getRawValue(inputTotal.value);
             inputTerima.value = amount === 'pas' ? total.toLocaleString('id-ID') : amount.toLocaleString('id-ID');
             calculate();
         }
-
-        function clearTerima() {
-            inputTerima.value = '';
-            handleMainInput();
-            calculate();
-        }
+        function clearTerima() { inputTerima.value = ''; handleMainInput(); calculate(); }
 
         function calculate() {
             const total = getRawValue(inputTotal.value);
@@ -517,119 +446,72 @@
             if (isSplitActive) {
                 statusResult.innerText = `Split: ${splitData.m1} (Rp ${splitData.v1.toLocaleString('id-ID')}) + ${splitData.m2} (Rp ${splitData.v2.toLocaleString('id-ID')})`;
                 statusResult.className = "status-result text-green";
-                btnSaveTx.disabled = total <= 0;
-                return;
+                btnSaveTx.disabled = total <= 0; return;
             }
 
-            if (terima === 0) {
-                statusResult.innerText = "-";
-                statusResult.className = "status-result text-neutral";
-                btnSaveTx.disabled = true;
-                return;
-            }
+            if (terima === 0) { statusResult.innerText = "-"; statusResult.className = "status-result text-neutral"; btnSaveTx.disabled = true; return; }
 
             const selisih = terima - total;
             if (selisih >= 0) {
                 statusResult.innerText = "Kembali: Rp " + selisih.toLocaleString('id-ID');
-                statusResult.className = "status-result text-green";
-                btnSaveTx.disabled = false;
+                statusResult.className = "status-result text-green"; btnSaveTx.disabled = false;
             } else {
                 statusResult.innerText = "Kurang: Rp " + Math.abs(selisih).toLocaleString('id-ID');
-                statusResult.className = "status-result text-red";
-                btnSaveTx.disabled = true;
+                statusResult.className = "status-result text-red"; btnSaveTx.disabled = true;
             }
         }
+        function resetSummary() { displayTotal.innerText = "Rp 0"; statusResult.innerText = "-"; statusResult.className = "status-result text-neutral"; btnSaveTx.disabled = true; }
+        function resetForm() { inputTotal.value = ''; inputTerima.value = ''; document.getElementById('payTunai').checked = true; isSplitActive = false; resetSummary(); }
 
-        function resetSummary() {
-            displayTotal.innerText = "Rp 0";
-            statusResult.innerText = "-";
-            statusResult.className = "status-result text-neutral";
-            btnSaveTx.disabled = true;
-        }
-
-        function resetForm() {
-            inputTotal.value = ''; inputTerima.value = '';
-            document.getElementById('payTunai').checked = true;
-            isSplitActive = false;
-            resetSummary();
-        }
-
-        // --- 6. LOGIKA MODAL SPLIT ---
+        // --- 7. LOGIKA MODAL SPLIT ---
         function openSplitModal() {
             const total = getRawValue(inputTotal.value);
             document.getElementById('modalTotalDisplay').innerText = "Rp " + total.toLocaleString('id-ID');
             let half = Math.floor(total / 2);
-            let remainder = total - half;
             splitAmount1.value = half > 0 ? half.toLocaleString('id-ID') : '';
-            splitAmount2.value = remainder > 0 ? remainder.toLocaleString('id-ID') : '';
+            splitAmount2.value = (total - half) > 0 ? (total - half).toLocaleString('id-ID') : '';
             modalOverlay.classList.add('active');
         }
-
         function syncSplitAmounts(changedField) {
-            const total = getRawValue(inputTotal.value);
-            const v1 = getRawValue(splitAmount1.value);
-            const v2 = getRawValue(splitAmount2.value);
-            if (changedField === 1) {
-                let remainder = total - v1;
-                splitAmount2.value = remainder > 0 ? remainder.toLocaleString('id-ID') : '0';
-            } else if (changedField === 2) {
-                let remainder = total - v2;
-                splitAmount1.value = remainder > 0 ? remainder.toLocaleString('id-ID') : '0';
-            }
+            const total = getRawValue(inputTotal.value), v1 = getRawValue(splitAmount1.value), v2 = getRawValue(splitAmount2.value);
+            if (changedField === 1) splitAmount2.value = (total - v1) > 0 ? (total - v1).toLocaleString('id-ID') : '0';
+            else if (changedField === 2) splitAmount1.value = (total - v2) > 0 ? (total - v2).toLocaleString('id-ID') : '0';
         }
-
         function closeSplitModal(isCancel = false) {
             modalOverlay.classList.remove('active');
-            if (isCancel) {
-                document.getElementById('payTunai').checked = true;
-                isSplitActive = false;
-                calculate();
-            }
+            if (isCancel) { document.getElementById('payTunai').checked = true; isSplitActive = false; calculate(); }
         }
-
         function applySplit() {
-            const v1 = getRawValue(splitAmount1.value);
-            const v2 = getRawValue(splitAmount2.value);
-            isSplitActive = true;
-            splitData = { m1: splitMethod1.value, v1: v1, m2: splitMethod2.value, v2: v2 };
-            inputTerima.value = (v1 + v2).toLocaleString('id-ID');
-            closeSplitModal();
-            calculate();
+            const v1 = getRawValue(splitAmount1.value), v2 = getRawValue(splitAmount2.value);
+            isSplitActive = true; splitData = { m1: splitMethod1.value, v1: v1, m2: splitMethod2.value, v2: v2 };
+            inputTerima.value = (v1 + v2).toLocaleString('id-ID'); closeSplitModal(); calculate();
         }
 
-        // --- 7. LOGIKA PEMBUKUAN (RIWAYAT) ---
+        // --- 8. LOGIKA PEMBUKUAN ---
         function saveTransaction() {
             const total = getRawValue(inputTotal.value);
             if (total <= 0) return;
 
             let tunaiPortion = 0, qrisPortion = 0, methodLabel = "";
-
             if (isSplitActive) {
                 methodLabel = "Split";
                 if (splitData.m1 === 'Tunai') tunaiPortion += splitData.v1; else qrisPortion += splitData.v1;
                 if (splitData.m2 === 'Tunai') tunaiPortion += splitData.v2; else qrisPortion += splitData.v2;
             } else {
-                const method = document.querySelector('input[name="payment"]:checked').value;
-                methodLabel = method;
-                if (method === 'Tunai') tunaiPortion = total; else qrisPortion = total;
+                methodLabel = document.querySelector('input[name="payment"]:checked').value;
+                if (methodLabel === 'Tunai') tunaiPortion = total; else qrisPortion = total;
             }
 
             const now = new Date();
             const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-            const currentTx = { id: Date.now(), total: total, method: methodLabel, tunai: tunaiPortion, qris: qrisPortion, time: timeStr };
-
-            transactions.unshift(currentTx);
+            transactions.unshift({ id: Date.now(), total: total, method: methodLabel, tunai: tunaiPortion, qris: qrisPortion, time: timeStr });
             localStorage.setItem('kasir_transactions', JSON.stringify(transactions));
 
-            resetForm();
-            
-            // Pindah otomatis ke tab riwayat untuk melihat hasil (Opsional)
-            switchTab('riwayat');
+            resetForm(); switchTab('riwayat');
         }
 
         function updateReportUI() {
             let totalOmzet = 0, totalTunai = 0, totalQris = 0, listHTML = "";
-
             transactions.forEach(tx => {
                 totalOmzet += tx.total; totalTunai += tx.tunai; totalQris += tx.qris;
                 listHTML += `
@@ -639,29 +521,19 @@
                             <span class="item-time">${tx.time} WIB</span>
                         </div>
                         <span class="item-method">${tx.method}</span>
-                    </div>
-                `;
+                    </div>`;
             });
-
             document.getElementById('omzetTotal').innerText = "Rp " + totalOmzet.toLocaleString('id-ID');
             document.getElementById('omzetTunai').innerText = "Rp " + totalTunai.toLocaleString('id-ID');
             document.getElementById('omzetQris').innerText = "Rp " + totalQris.toLocaleString('id-ID');
-            
             document.getElementById('historyList').innerHTML = listHTML || `<div style="text-align:center; padding: 40px 0; font-size:0.85rem; color:var(--text-muted);">Belum ada penjualan hari ini.</div>`;
         }
 
         function clearHistory() {
             if (transactions.length === 0) return alert("Belum ada data untuk dihapus.");
-            const confirmText = prompt('⚠️ PERINGATAN: Data omzet akan di-reset.\n\nKetik "HAPUS" untuk mengonfirmasi:');
-            
-            if (confirmText === 'HAPUS') {
-                transactions = [];
-                localStorage.removeItem('kasir_transactions');
-                updateReportUI();
-                alert('Data pembukuan berhasil dikosongkan.');
-            } else if (confirmText !== null) {
-                alert('Kata kunci salah. Penghapusan dibatalkan.');
-            }
+            if (prompt('⚠️ PERINGATAN: Data omzet akan di-reset.\n\nKetik "HAPUS" untuk mengonfirmasi:') === 'HAPUS') {
+                transactions = []; localStorage.removeItem('kasir_transactions'); updateReportUI(); alert('Data pembukuan berhasil dikosongkan.');
+            } else { alert('Kata kunci salah. Penghapusan dibatalkan.'); }
         }
     </script>
 </body>
