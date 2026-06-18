@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kasir Pintar v2.3.1</title>
+    <title>Kasir Pintar v2.3.2</title>
     
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#121212">
@@ -41,12 +41,13 @@
         .header-title { text-align: center; flex: 1; } .header-title h1 { font-size: 1.15rem; font-weight: 800; }
         .btn-menu-dots { background: none; border: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer; width: 32px; height: 32px; display: flex; justify-content: flex-end; align-items: center; }
 
+        /* AREA TAB */
         main { flex: 1; position: relative; overflow: hidden; background-color: var(--bg-color); }
         .tab-pane { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; opacity: 0; transition: opacity 0.2s ease; }
         .tab-pane.active { display: flex; opacity: 1; }
 
         /* =========================================
-           3. TAB KASIR (FIXED)
+           3. TAB KASIR
         ========================================= */
         #tab-kasir { padding: 12px 16px; justify-content: space-between; overflow: hidden; }
         .form-group label { display: block; font-size: 0.75rem; margin-bottom: 6px; color: var(--text-muted); font-weight: 800; text-transform: uppercase; }
@@ -85,7 +86,8 @@
         /* =========================================
            4. TAB KALKULATOR PRO
         ========================================= */
-        #tab-kalkulator { padding: 20px; justify-content: space-between; overflow: hidden; display: none; }
+        /* Hapus display:none di CSS ID agar logic JS tab-pane bekerja murni */
+        #tab-kalkulator { padding: 20px; justify-content: space-between; overflow: hidden; }
         .calc-display-container { background-color: var(--surface-color); padding: 24px 20px; border-radius: 20px; margin-bottom: 20px; text-align: right; box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); border: 1px solid var(--border); }
         .calc-history { font-size: 1rem; color: var(--text-muted); min-height: 1.2em; margin-bottom: 8px; font-weight: 600; }
         .calc-display { width: 100%; background: transparent; border: none; font-size: 2.8rem; font-weight: 800; color: var(--text-main); text-align: right; outline: none; }
@@ -101,7 +103,8 @@
         /* =========================================
            5. TAB RIWAYAT
         ========================================= */
-        #tab-riwayat { overflow-y: auto; padding: 20px; display: none; }
+        /* Hapus display:none di CSS ID agar logic JS tab-pane bekerja murni */
+        #tab-riwayat { overflow-y: auto; padding: 20px; }
         .report-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
         .report-card { background-color: var(--surface-color); padding: 16px 10px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .card-label { display: block; font-size: 0.65rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-bottom: 6px; }
@@ -341,6 +344,7 @@
         <div id="aboutSheetOverlay" class="modal-overlay" style="align-items: flex-end; padding: 0;">
             <div id="aboutSheet" class="bottom-sheet-container">
                 <div class="drag-handle"></div>
+                
                 <div style="width: 100%;">
                     <div class="theme-section-title">Mode Gelap (Dark)</div>
                     <div class="theme-grid">
@@ -364,9 +368,10 @@
                 </div>
 
                 <div class="sheet-divider"></div>
+                
                 <div class="sheet-footer">
                     <h2 class="sheet-title">Kasir Pintar</h2>
-                    <div class="sheet-version">Versi 2.3.1 PWA</div>
+                    <div class="sheet-version">Versi 2.3.2 (Stable Fix)</div>
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Dibuat oleh <span style="font-weight: 800; color: var(--primary);">Sulfikar</span></p>
                     <div class="social-icons">
                         <a href="#" class="social-btn" style="background-color: #1877F2;">
@@ -407,7 +412,7 @@
         }
         setTheme(savedTheme);
 
-        // --- 2. SYSTEM TAB BARU ---
+        // --- 2. SYSTEM TAB NAVIGATION ---
         function switchTab(tabName) {
             document.querySelectorAll('.tab-pane').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
@@ -453,7 +458,7 @@
             sheetStartY = null;
         });
 
-        // --- 4. DOM & DATA STORAGE (SAFE PARSE) ---
+        // --- 4. DOM & SECURE DATA STORAGE ---
         const inputTotal = document.getElementById('totalBelanja');
         const inputTerima = document.getElementById('uangDiterima');
         const displayTotal = document.getElementById('displayTotal');
@@ -468,10 +473,13 @@
         let isSplitActive = false;
         let splitData = { m1: '', v1: 0, m2: '', v2: 0 };
         
-        // Anti-Crash untuk data lama
+        // PENGAMANAN ANTI-CRASH MEMORI LOKAL
         let transactions = [];
         try {
-            transactions = JSON.parse(localStorage.getItem('kasir_transactions')) || [];
+            let parsedData = JSON.parse(localStorage.getItem('kasir_transactions'));
+            if (Array.isArray(parsedData)) {
+                transactions = parsedData;
+            }
         } catch (e) { transactions = []; }
 
         // --- 5. FORMAT KEYBOARD MOBILE ---
@@ -576,35 +584,45 @@
         }
 
         function updateReportUI() {
-            let totalOmzet = 0, totalTunai = 0, totalQris = 0, listHTML = "";
-            
-            transactions.forEach(tx => {
-                totalOmzet += tx.total; totalTunai += tx.tunai; totalQris += tx.qris;
+            try {
+                let totalOmzet = 0, totalTunai = 0, totalQris = 0, listHTML = "";
                 
-                // BACKWARD COMPATIBILITY: Cegah error "undefined" jika data lama tidak ada nilai "terima"
-                let amanTerima = tx.terima !== undefined ? tx.terima : tx.total;
-                let kembalian = amanTerima - tx.total;
-                let statusKembalian = kembalian > 0 ? 'Kbl: Rp ' + kembalian.toLocaleString('id-ID') : 'Pas';
+                transactions.forEach(tx => {
+                    // Pencegahan error jika data korup
+                    let valTotal = Number(tx.total) || 0;
+                    let valTunai = Number(tx.tunai) || 0;
+                    let valQris = Number(tx.qris) || 0;
+                    
+                    totalOmzet += valTotal; 
+                    totalTunai += valTunai; 
+                    totalQris += valQris;
+                    
+                    let amanTerima = tx.terima !== undefined ? Number(tx.terima) : valTotal;
+                    let kembalian = amanTerima - valTotal;
+                    let statusKembalian = kembalian > 0 ? 'Kbl: Rp ' + kembalian.toLocaleString('id-ID') : 'Pas';
 
-                listHTML += `
-                    <div class="history-item">
-                        <div class="item-meta">
-                            <span class="item-amount">Total: Rp ${tx.total.toLocaleString('id-ID')}</span>
-                            <span class="item-time">${tx.time} WIB • Terima: Rp ${amanTerima.toLocaleString('id-ID')}</span>
-                        </div>
-                        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
-                            <span class="item-method">${tx.method}</span>
-                            <span style="font-size:0.7rem; font-weight:700; color:var(--text-muted);">
-                                ${statusKembalian}
-                            </span>
-                        </div>
-                    </div>`;
-            });
+                    listHTML += `
+                        <div class="history-item">
+                            <div class="item-meta">
+                                <span class="item-amount">Total: Rp ${valTotal.toLocaleString('id-ID')}</span>
+                                <span class="item-time">${tx.time || '--:--'} WIB • Terima: Rp ${amanTerima.toLocaleString('id-ID')}</span>
+                            </div>
+                            <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+                                <span class="item-method">${tx.method || '-'}</span>
+                                <span style="font-size:0.7rem; font-weight:700; color:var(--text-muted);">
+                                    ${statusKembalian}
+                                </span>
+                            </div>
+                        </div>`;
+                });
 
-            document.getElementById('omzetTotal').innerText = "Rp " + totalOmzet.toLocaleString('id-ID');
-            document.getElementById('omzetTunai').innerText = "Rp " + totalTunai.toLocaleString('id-ID');
-            document.getElementById('omzetQris').innerText = "Rp " + totalQris.toLocaleString('id-ID');
-            document.getElementById('historyList').innerHTML = listHTML || `<div style="text-align:center; padding: 40px 0; font-size:0.85rem; color:var(--text-muted);">Belum ada penjualan hari ini.</div>`;
+                document.getElementById('omzetTotal').innerText = "Rp " + totalOmzet.toLocaleString('id-ID');
+                document.getElementById('omzetTunai').innerText = "Rp " + totalTunai.toLocaleString('id-ID');
+                document.getElementById('omzetQris').innerText = "Rp " + totalQris.toLocaleString('id-ID');
+                document.getElementById('historyList').innerHTML = listHTML || `<div style="text-align:center; padding: 40px 0; font-size:0.85rem; color:var(--text-muted);">Belum ada penjualan hari ini.</div>`;
+            } catch (error) {
+                console.log("Error render riwayat:", error);
+            }
         }
 
         function clearHistory() {
@@ -614,7 +632,7 @@
             } else { alert('Kata kunci salah. Penghapusan dibatalkan.'); }
         }
 
-        // --- 9. LOGIKA KALKULATOR PRO ---
+        // --- 9. LOGIKA KALKULATOR PRO (ERROR PROOF) ---
         let calcVal = '0'; let calcExpr = '';
         const calcDisplay = document.getElementById('calcDisplay');
         const calcHistory = document.getElementById('calcHistory');
@@ -627,16 +645,22 @@
                     calcExpr = calcVal;
                     let toEval = calcVal.replace(/×/g, '*').replace(/÷/g, '/');
                     if(/[+\-*/.]$/.test(toEval)) toEval = toEval.slice(0,-1);
-                    let res = new Function('return ' + toEval)();
+                    
+                    let res = 0;
+                    if(toEval) res = new Function('return ' + toEval)();
+                    if(res === undefined || isNaN(res) || !isFinite(res)) res = 0;
                     if (res % 1 !== 0) res = parseFloat(res.toFixed(6));
+                    
                     calcVal = String(res);
                 } catch(e) { calcVal = '0'; }
             } 
             else if (val === '%') {
                 try {
                     let toEval = calcVal.replace(/×/g, '*').replace(/÷/g, '/');
-                    let res = new Function('return ' + toEval)() / 100;
-                    calcVal = String(res);
+                    if(toEval) {
+                        let res = new Function('return ' + toEval)() / 100;
+                        calcVal = String(res || 0);
+                    }
                 } catch(e) { calcVal = '0'; }
             } 
             else {
@@ -655,7 +679,7 @@
             calcHistory.innerText = calcExpr ? calcExpr + ' =' : '';
         }
         
-        // Panggil update UI di awal agar data riwayat aman langsung di-render
+        // Panggil render UI aman di awal
         updateReportUI();
     </script>
 </body>
