@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kasir-pintar-v2';
+const CACHE_NAME = 'kasir-pintar-v2.3.0';
 const urlsToCache = [
   './',
   './index.html',
