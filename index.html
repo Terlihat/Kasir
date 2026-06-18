@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kasir Pintar</title>
+    <title>Kasir Pintar v2.3.0</title>
     
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#121212">
@@ -21,9 +21,7 @@
         [data-theme="dark-permen"] { --bg-color: #311024; --surface-color: #500724; --text-main: #fce7f3; --text-muted: #f472b6; --primary: #ec4899; --primary-hover: #db2777; --success: #10b981; --danger: #ef4444; --border: #831843; --btn-bg: #831843; --btn-text: #fce7f3; --status-bg: #311024; --nav-bg: #500724; }
         [data-theme="dark-sunset"] { --bg-color: #2a0a0a; --surface-color: #450a0a; --text-main: #ffedd5; --text-muted: #fdba74; --primary: #f97316; --primary-hover: #ea580c; --success: #10b981; --danger: #ef4444; --border: #7f1d1d; --btn-bg: #7f1d1d; --btn-text: #ffedd5; --status-bg: #2a0a0a; --nav-bg: #450a0a; }
         [data-theme="dark-rosegold"] { --bg-color: #292524; --surface-color: #44403c; --text-main: #ffe4e6; --text-muted: #fda4af; --primary: #f43f5e; --primary-hover: #e11d48; --success: #10b981; --danger: #ef4444; --border: #57534e; --btn-bg: #57534e; --btn-text: #ffe4e6; --status-bg: #292524; --nav-bg: #44403c; }
-        /* TEMA BARU: NEON */
         [data-theme="dark-neon"] { --bg-color: #050505; --surface-color: #111111; --text-main: #ffffff; --text-muted: #a3a3a3; --primary: #00ffff; --primary-hover: #00cccc; --success: #39ff14; --danger: #ff007f; --border: #222222; --btn-bg: #1a1a1a; --btn-text: #ffffff; --status-bg: #000000; --nav-bg: #0a0a0a; }
-
         [data-theme="light-nordic"] { --bg-color: #f8fafc; --surface-color: #ffffff; --text-main: #334155; --text-muted: #64748b; --primary: #64748b; --primary-hover: #475569; --success: #059669; --danger: #dc2626; --border: #e2e8f0; --btn-bg: #f1f5f9; --btn-text: #334155; --status-bg: #f8fafc; --nav-bg: #ffffff; }
         [data-theme="light-citrus"] { --bg-color: #fffbeb; --surface-color: #ffffff; --text-main: #78350f; --text-muted: #b45309; --primary: #f59e0b; --primary-hover: #d97706; --success: #059669; --danger: #dc2626; --border: #fde68a; --btn-bg: #fef3c7; --btn-text: #78350f; --status-bg: #fffbeb; --nav-bg: #ffffff; }
         [data-theme="light-cottoncandy"] { --bg-color: #fdf2f8; --surface-color: #ffffff; --text-main: #831843; --text-muted: #db2777; --primary: #ec4899; --primary-hover: #db2777; --success: #059669; --danger: #dc2626; --border: #fbcfe8; --btn-bg: #fce7f3; --btn-text: #831843; --status-bg: #fdf2f8; --nav-bg: #ffffff; }
@@ -46,21 +44,29 @@
         .tab-pane { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; opacity: 0; transition: opacity 0.2s ease; }
         .tab-pane.active { display: flex; opacity: 1; }
 
-        /* TAB KASIR */
+        /* =========================================
+           3. TAB KASIR (DIPERBESAR)
+        ========================================= */
         #tab-kasir { padding: 12px 16px; justify-content: space-between; overflow: hidden; }
         .form-group label { display: block; font-size: 0.75rem; margin-bottom: 6px; color: var(--text-muted); font-weight: 800; text-transform: uppercase; }
         .input-box { width: 100%; background-color: var(--surface-color); border: 2px solid transparent; color: var(--text-main); padding: 12px 16px; font-size: 1.25rem; font-weight: bold; border-radius: 10px; outline: none; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .input-box:focus { border-color: var(--primary); } .input-box::placeholder { color: var(--text-muted); font-weight: 600; font-size: 1rem; }
 
-        .payment-methods { display: flex; flex-direction: column; gap: 8px; margin: 10px 0; }
+        .payment-methods { display: flex; flex-direction: column; gap: 8px; margin: 8px 0; }
         .payment-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
         .payment-methods input[type="radio"] { display: none; }
         .payment-label { text-align: center; padding: 12px 8px; background-color: var(--surface-color); color: var(--text-main); border: 2px solid transparent; border-radius: 10px; font-size: 0.85rem; font-weight: 800; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .payment-methods input[type="radio"]:checked + .payment-label { background-color: var(--primary); color: #ffffff; }
 
-        .quick-amounts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 8px; }
-        .btn-quick { background-color: var(--surface-color); color: var(--text-main); border: none; padding: 10px 0; border-radius: 8px; font-weight: 800; font-size: 0.8rem; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .btn-quick:active { transform: scale(0.95); background-color: var(--border); }
+        /* PERUBAHAN GRID NOMINAL (Diperbesar) */
+        .quick-amounts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+        .btn-quick { 
+            background-color: var(--surface-color); color: var(--text-main); border: none; 
+            padding: 16px 0; border-radius: 10px; font-weight: 800; font-size: 1rem; /* Ukuran lebih besar */
+            cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: transform 0.1s;
+        }
+        .btn-quick.pas { grid-column: span 2; background-color: var(--primary); color: white; }
+        .btn-quick:active { transform: scale(0.95); }
         .btn-clear { color: var(--danger); background-color: var(--surface-color); }
 
         .summary-section { background-color: var(--surface-color); padding: 16px; border-radius: 16px; margin-top: auto; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); }
@@ -74,13 +80,39 @@
         .text-green { color: var(--success); } .text-red { color: var(--danger); } .text-neutral { color: var(--text-muted); }
 
         .action-buttons { display: flex; gap: 8px; }
-        .btn-action { flex: 1; padding: 14px; border-radius: 10px; font-size: 0.9rem; font-weight: 800; cursor: pointer; border: none; }
+        .btn-action { flex: 1; padding: 14px; border-radius: 10px; font-size: 0.9rem; font-weight: 800; cursor: pointer; border: none; transition: transform 0.1s; }
+        .btn-action:active { transform: scale(0.97); }
         .btn-save { background-color: var(--success); color: #ffffff; }
         .btn-save:disabled { background-color: var(--btn-bg); color: var(--text-muted); }
         .btn-reset { background-color: var(--btn-bg); color: var(--text-muted); flex: 0.4; }
 
-        /* TAB RIWAYAT */
-        #tab-riwayat { overflow-y: auto; padding: 20px; }
+        /* =========================================
+           4. TAB KALKULATOR PRO (BARU)
+        ========================================= */
+        #tab-kalkulator { padding: 20px; justify-content: space-between; overflow: hidden; display: none; }
+        .calc-display-container {
+            background-color: var(--surface-color); padding: 24px 20px; border-radius: 20px;
+            margin-bottom: 20px; text-align: right; box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); border: 1px solid var(--border);
+        }
+        .calc-history { font-size: 1rem; color: var(--text-muted); min-height: 1.2em; margin-bottom: 8px; font-weight: 600; }
+        .calc-display { width: 100%; background: transparent; border: none; font-size: 2.8rem; font-weight: 800; color: var(--text-main); text-align: right; outline: none; }
+        
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; flex: 1; align-content: end; }
+        .calc-btn { 
+            background-color: var(--surface-color); color: var(--text-main); font-size: 1.4rem; font-weight: 800; 
+            border: none; border-radius: 16px; padding: 18px 0; cursor: pointer; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.1s, filter 0.2s; 
+        }
+        .calc-btn:active { transform: scale(0.93); filter: brightness(0.9); }
+        .calc-op { color: var(--primary); background-color: var(--status-bg); font-size: 1.6rem; }
+        .calc-eq { background-color: var(--primary); color: white; }
+        .calc-zero { grid-column: span 2; }
+        .calc-clear { color: var(--danger); }
+
+        /* =========================================
+           5. TAB RIWAYAT
+        ========================================= */
+        #tab-riwayat { overflow-y: auto; padding: 20px; display: none; }
         .report-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
         .report-card { background-color: var(--surface-color); padding: 16px 10px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .card-label { display: block; font-size: 0.65rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-bottom: 6px; }
@@ -90,33 +122,28 @@
         .history-item { display: flex; justify-content: space-between; align-items: center; padding: 14px; background-color: var(--surface-color); border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
         .item-meta { display: flex; flex-direction: column; gap: 4px; }
         .item-time { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; }
-        .item-method { font-size: 0.7rem; font-weight: 800; color: var(--primary); background-color: var(--status-bg); padding: 4px 8px; border-radius: 6px; align-self: flex-start; }
+        /* Badge Kembalian di Riwayat */
+        .item-method { font-size: 0.7rem; font-weight: 800; color: var(--primary); background-color: var(--status-bg); padding: 4px 8px; border-radius: 6px; align-self: flex-end; }
         .item-amount { font-weight: 800; font-size: 1rem; }
         .btn-clear-history { width: 100%; background-color: var(--surface-color); color: var(--danger); border: 2px solid var(--border); padding: 14px; font-size: 0.85rem; font-weight: 800; border-radius: 12px; margin-top: 20px; cursor: pointer; }
 
-        /* TAB TAMPILAN */
-        #tab-tampilan { overflow-y: auto; padding: 20px; }
-        .theme-section-title { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; margin-top: 10px; }
-        .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
-        .theme-btn { background-color: var(--surface-color); border: 2px solid transparent; color: var(--text-main); padding: 16px; border-radius: 12px; font-size: 0.85rem; font-weight: 800; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: all 0.2s; }
-        .theme-btn.active { border-color: var(--primary); background-color: var(--status-bg); }
-        .theme-color-preview { width: 16px; height: 16px; border-radius: 50%; display: inline-block; }
-        /* Style Spesial Untuk Dot Neon */
-        [data-theme="dark-neon"] .theme-btn.active { box-shadow: 0 0 10px rgba(0,255,255,0.3); }
-
-        /* BOTTOM NAV */
+        /* =========================================
+           6. BOTTOM NAV (SUSUNAN BARU)
+        ========================================= */
         .bottom-nav { display: flex; background-color: var(--nav-bg); border-top: 1px solid var(--border); height: 65px; flex-shrink: 0; padding-bottom: max(0px, env(safe-area-inset-bottom)); }
         .nav-item { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; background: none; border: none; color: var(--text-muted); cursor: pointer; gap: 4px; transition: color 0.2s; }
         .nav-item.active { color: var(--primary); }
         .nav-icon { font-size: 1.25rem; }
         .nav-text { font-size: 0.7rem; font-weight: 800; }
 
-        /* MODAL OVERLAY DASAR */
-        .modal-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px; }
-        .modal-overlay.active { display: flex; }
+        /* =========================================
+           7. MODALS & BOTTOM SHEET (TEMA PINDAH KESINI)
+        ========================================= */
+        .modal-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
+        .modal-overlay.active { display: flex; opacity: 1; }
 
-        /* Modal Split Payment */
-        .modal-content { width: 100%; background-color: var(--surface-color); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+        .modal-content { width: 100%; background-color: var(--surface-color); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); transform: translateY(20px); transition: transform 0.3s ease; }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
         .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 12px; }
         .modal-title { font-weight: 800; font-size: 0.95rem; }
         .modal-total { font-weight: 800; font-size: 1.2rem; color: var(--primary); }
@@ -130,25 +157,32 @@
         .btn-modal-cancel { background-color: var(--btn-bg); color: var(--text-main); }
         .btn-modal-apply { background-color: var(--primary); color: white; }
 
-        /* BOTTOM SHEET (INFO AUTHOR) */
+        /* Bottom Sheet Theme & Author */
         .bottom-sheet-container {
-            position: absolute; bottom: 0; left: 0; width: 100%;
+            position: absolute; bottom: 0; left: 0; width: 100%; max-height: 85vh; overflow-y: auto;
             background-color: var(--surface-color); border-radius: 24px 24px 0 0;
             padding: 10px 24px 30px 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
             transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 101; display: flex; flex-direction: column; align-items: center;
+            z-index: 101; display: flex; flex-direction: column;
         }
         .modal-overlay.sheet-active .bottom-sheet-container { transform: translateY(0); }
-        .drag-handle { width: 40px; height: 5px; background-color: var(--border); border-radius: 5px; margin: 0 auto 20px auto; }
-        .sheet-logo { font-size: 2.5rem; margin-bottom: 10px; }
-        .sheet-title { font-size: 1.25rem; font-weight: 800; margin-bottom: 4px; color: var(--text-main); }
-        .sheet-version { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); background-color: var(--btn-bg); padding: 4px 10px; border-radius: 12px; margin-bottom: 24px; }
-        .sheet-author { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; }
-        .sheet-author span { font-weight: 800; color: var(--primary); }
-        .social-icons { display: flex; gap: 16px; }
-        .social-btn { width: 44px; height: 44px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; transition: transform 0.2s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .social-btn:active { transform: scale(0.9); }
-        .social-btn svg { width: 22px; height: 22px; fill: white; }
+        .drag-handle { width: 40px; height: 5px; background-color: var(--border); border-radius: 5px; margin: 0 auto 20px auto; flex-shrink: 0; }
+        
+        /* Grid Tema di dalam Bottom Sheet */
+        .theme-section-title { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; margin-top: 10px; }
+        .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+        .theme-btn { background-color: var(--bg-color); border: 2px solid transparent; color: var(--text-main); padding: 14px; border-radius: 12px; font-size: 0.85rem; font-weight: 800; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .theme-btn.active { border-color: var(--primary); background-color: var(--status-bg); }
+        .theme-color-preview { width: 16px; height: 16px; border-radius: 50%; display: inline-block; }
+        [data-theme="dark-neon"] .theme-btn.active { box-shadow: 0 0 10px rgba(0,255,255,0.3); }
+
+        .sheet-divider { width: 100%; height: 1px; background-color: var(--border); margin: 10px 0 20px 0; }
+        .sheet-footer { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .sheet-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; color: var(--text-main); }
+        .sheet-version { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 16px; }
+        .social-icons { display: flex; gap: 16px; justify-content: center; }
+        .social-btn { width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; }
+        .social-btn svg { width: 20px; height: 20px; fill: white; }
     </style>
 </head>
 <body>
@@ -194,14 +228,20 @@
                            onfocus="removeFormat(this)" onblur="applyFormat(this)" oninput="cleanInput(this); handleMainInput(); calculate()">
                     
                     <div class="quick-amounts">
-                        <button class="btn-quick" onclick="setQuickAmount('pas')">Uang Pas</button>
+                        <button class="btn-quick pas" onclick="setQuickAmount('pas')">Uang Pas</button>
+                        <button class="btn-quick btn-clear" onclick="clearTerima()">C</button>
+                        
                         <button class="btn-quick" onclick="setQuickAmount(5000)">5K</button>
                         <button class="btn-quick" onclick="setQuickAmount(10000)">10K</button>
                         <button class="btn-quick" onclick="setQuickAmount(20000)">20K</button>
+                        
+                        <button class="btn-quick" onclick="setQuickAmount(30000)">30K</button>
+                        <button class="btn-quick" onclick="setQuickAmount(35000)">35K</button>
+                        <button class="btn-quick" onclick="setQuickAmount(40000)">40K</button>
+                        
                         <button class="btn-quick" onclick="setQuickAmount(50000)">50K</button>
                         <button class="btn-quick" onclick="setQuickAmount(75000)">75K</button>
                         <button class="btn-quick" onclick="setQuickAmount(100000)">100K</button>
-                        <button class="btn-quick btn-clear" onclick="clearTerima()">C</button>
                     </div>
                 </div>
 
@@ -218,6 +258,39 @@
                         <button class="btn-action btn-reset" onclick="resetForm()">Reset</button>
                         <button class="btn-action btn-save" id="btnSaveTx" onclick="saveTransaction()" disabled>Simpan Transaksi</button>
                     </div>
+                </div>
+            </div>
+
+            <div id="tab-kalkulator" class="tab-pane">
+                <div class="calc-display-container">
+                    <div class="calc-history" id="calcHistory"></div>
+                    <input type="text" id="calcDisplay" class="calc-display" value="0" readonly>
+                </div>
+                
+                <div class="calc-grid">
+                    <button class="calc-btn calc-op calc-clear" onclick="calcAction('AC')">AC</button>
+                    <button class="calc-btn calc-op" onclick="calcAction('DEL')">⌫</button>
+                    <button class="calc-btn calc-op" onclick="calcAction('%')">%</button>
+                    <button class="calc-btn calc-op" onclick="calcAction('/')">÷</button>
+                    
+                    <button class="calc-btn" onclick="calcAction('7')">7</button>
+                    <button class="calc-btn" onclick="calcAction('8')">8</button>
+                    <button class="calc-btn" onclick="calcAction('9')">9</button>
+                    <button class="calc-btn calc-op" onclick="calcAction('*')">×</button>
+                    
+                    <button class="calc-btn" onclick="calcAction('4')">4</button>
+                    <button class="calc-btn" onclick="calcAction('5')">5</button>
+                    <button class="calc-btn" onclick="calcAction('6')">6</button>
+                    <button class="calc-btn calc-op" onclick="calcAction('-')">-</button>
+                    
+                    <button class="calc-btn" onclick="calcAction('1')">1</button>
+                    <button class="calc-btn" onclick="calcAction('2')">2</button>
+                    <button class="calc-btn" onclick="calcAction('3')">3</button>
+                    <button class="calc-btn calc-op" onclick="calcAction('+')">+</button>
+                    
+                    <button class="calc-btn calc-zero" onclick="calcAction('0')">0</button>
+                    <button class="calc-btn" onclick="calcAction('.')">.</button>
+                    <button class="calc-btn calc-eq" onclick="calcAction('=')">=</button>
                 </div>
             </div>
 
@@ -240,28 +313,6 @@
                 <div class="history-list" id="historyList"></div>
                 <button class="btn-clear-history" onclick="clearHistory()">Kosongkan Pembukuan</button>
             </div>
-
-            <div id="tab-tampilan" class="tab-pane">
-                <div class="theme-section-title">Mode Gelap (Dark)</div>
-                <div class="theme-grid">
-                    <button class="theme-btn" onclick="setTheme('dark-default')"><span class="theme-color-preview" style="background:#121212; border:1px solid #333;"></span> Default</button>
-                    <button class="theme-btn" onclick="setTheme('dark-neon')"><span class="theme-color-preview" style="background:#00ffff; box-shadow: 0 0 8px #00ffff;"></span> Neon</button>
-                    <button class="theme-btn" onclick="setTheme('dark-ocean')"><span class="theme-color-preview" style="background:#0ea5e9;"></span> Ocean</button>
-                    <button class="theme-btn" onclick="setTheme('dark-sapphire')"><span class="theme-color-preview" style="background:#4f46e5;"></span> Sapphire</button>
-                    <button class="theme-btn" onclick="setTheme('dark-lavender')"><span class="theme-color-preview" style="background:#8b5cf6;"></span> Lavender</button>
-                    <button class="theme-btn" onclick="setTheme('dark-permen')"><span class="theme-color-preview" style="background:#ec4899;"></span> Permen</button>
-                    <button class="theme-btn" onclick="setTheme('dark-sunset')"><span class="theme-color-preview" style="background:#f97316;"></span> Sunset</button>
-                    <button class="theme-btn" onclick="setTheme('dark-rosegold')"><span class="theme-color-preview" style="background:#f43f5e;"></span> Rose Gold</button>
-                </div>
-
-                <div class="theme-section-title">Mode Terang (Light)</div>
-                <div class="theme-grid">
-                    <button class="theme-btn" onclick="setTheme('light-nordic')"><span class="theme-color-preview" style="background:#f8fafc; border:1px solid #ccc;"></span> Light Nordic</button>
-                    <button class="theme-btn" onclick="setTheme('light-citrus')"><span class="theme-color-preview" style="background:#f59e0b;"></span> Light Citrus</button>
-                    <button class="theme-btn" onclick="setTheme('light-cottoncandy')"><span class="theme-color-preview" style="background:#ec4899;"></span> Cotton Candy</button>
-                    <button class="theme-btn" onclick="setTheme('light-mint')"><span class="theme-color-preview" style="background:#10b981;"></span> Mint Green</button>
-                </div>
-            </div>
         </main>
 
         <nav class="bottom-nav">
@@ -269,13 +320,13 @@
                 <span class="nav-icon">🛒</span>
                 <span class="nav-text">Kasir</span>
             </button>
+            <button class="nav-item" id="nav-kalkulator" onclick="switchTab('kalkulator')">
+                <span class="nav-icon">🔢</span>
+                <span class="nav-text">Kalkulator</span>
+            </button>
             <button class="nav-item" id="nav-riwayat" onclick="switchTab('riwayat')">
                 <span class="nav-icon">📓</span>
                 <span class="nav-text">Riwayat</span>
-            </button>
-            <button class="nav-item" id="nav-tampilan" onclick="switchTab('tampilan')">
-                <span class="nav-icon">✨</span>
-                <span class="nav-text">Tampilan</span>
             </button>
         </nav>
 
@@ -309,22 +360,46 @@
         <div id="aboutSheetOverlay" class="modal-overlay" style="align-items: flex-end; padding: 0;">
             <div id="aboutSheet" class="bottom-sheet-container">
                 <div class="drag-handle"></div>
-                <div class="sheet-logo">💡</div>
-                <h2 class="sheet-title">Kasir Pintar</h2>
-                <div class="sheet-version">Versi 2.2.0</div>
                 
-                <p class="sheet-author">Dibuat oleh <span>Sulfikar</span></p>
+                <div style="width: 100%;">
+                    <div class="theme-section-title">Mode Gelap (Dark)</div>
+                    <div class="theme-grid">
+                        <button class="theme-btn" onclick="setTheme('dark-default')"><span class="theme-color-preview" style="background:#121212; border:1px solid #333;"></span> Default</button>
+                        <button class="theme-btn" onclick="setTheme('dark-neon')"><span class="theme-color-preview" style="background:#00ffff; box-shadow: 0 0 8px #00ffff;"></span> Neon</button>
+                        <button class="theme-btn" onclick="setTheme('dark-ocean')"><span class="theme-color-preview" style="background:#0ea5e9;"></span> Ocean</button>
+                        <button class="theme-btn" onclick="setTheme('dark-sapphire')"><span class="theme-color-preview" style="background:#4f46e5;"></span> Sapphire</button>
+                        <button class="theme-btn" onclick="setTheme('dark-lavender')"><span class="theme-color-preview" style="background:#8b5cf6;"></span> Lavender</button>
+                        <button class="theme-btn" onclick="setTheme('dark-permen')"><span class="theme-color-preview" style="background:#ec4899;"></span> Permen</button>
+                        <button class="theme-btn" onclick="setTheme('dark-sunset')"><span class="theme-color-preview" style="background:#f97316;"></span> Sunset</button>
+                        <button class="theme-btn" onclick="setTheme('dark-rosegold')"><span class="theme-color-preview" style="background:#f43f5e;"></span> Rose Gold</button>
+                    </div>
 
-                <div class="social-icons">
-                    <a href="#" class="social-btn" style="background-color: #1877F2;">
-                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                    </a>
-                    <a href="#" class="social-btn" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);">
-                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-                    </a>
-                    <a href="#" class="social-btn" style="background-color: #0088cc;">
-                        <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.888-.666 3.473-1.513 5.789-2.511 6.947-2.995 3.303-1.385 3.991-1.624 4.437-1.63z"/></svg>
-                    </a>
+                    <div class="theme-section-title">Mode Terang (Light)</div>
+                    <div class="theme-grid">
+                        <button class="theme-btn" onclick="setTheme('light-nordic')"><span class="theme-color-preview" style="background:#f8fafc; border:1px solid #ccc;"></span> Light Nordic</button>
+                        <button class="theme-btn" onclick="setTheme('light-citrus')"><span class="theme-color-preview" style="background:#f59e0b;"></span> Light Citrus</button>
+                        <button class="theme-btn" onclick="setTheme('light-cottoncandy')"><span class="theme-color-preview" style="background:#ec4899;"></span> Cotton Candy</button>
+                        <button class="theme-btn" onclick="setTheme('light-mint')"><span class="theme-color-preview" style="background:#10b981;"></span> Mint Green</button>
+                    </div>
+                </div>
+
+                <div class="sheet-divider"></div>
+                
+                <div class="sheet-footer">
+                    <h2 class="sheet-title">Kasir Pintar</h2>
+                    <div class="sheet-version">Versi 2.3.0 PWA</div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Dibuat oleh <span style="font-weight: 800; color: var(--primary);">Sulfikar</span></p>
+                    <div class="social-icons">
+                        <a href="#" class="social-btn" style="background-color: #1877F2;">
+                            <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" class="social-btn" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="#" class="social-btn" style="background-color: #0088cc;">
+                            <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.888-.666 3.473-1.513 5.789-2.511 6.947-2.995 3.303-1.385 3.991-1.624 4.437-1.63z"/></svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -334,16 +409,13 @@
         // --- 0. REGISTER PWA SERVICE WORKER ---
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('PWA Service Worker terdaftar!', reg))
-                    .catch(err => console.log('Gagal mendaftar Service Worker', err));
+                navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW fail', err));
             });
         }
 
         // --- 1. SYSTEM TEMA ---
         const html = document.documentElement;
         const savedTheme = localStorage.getItem('theme_v2') || 'dark-default';
-        
         function setTheme(themeName) {
             html.setAttribute('data-theme', themeName);
             localStorage.setItem('theme_v2', themeName);
@@ -351,14 +423,11 @@
                 btn.classList.remove('active');
                 if(btn.getAttribute('onclick').includes(themeName)) btn.classList.add('active');
             });
-            // Update warna PWA status bar HP
-            document.querySelector('meta[name="theme-color"]').setAttribute('content', 
-                getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim()
-            );
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim());
         }
         setTheme(savedTheme);
 
-        // --- 2. SYSTEM TAB ---
+        // --- 2. SYSTEM TAB BARU ---
         function switchTab(tabName) {
             document.querySelectorAll('.tab-pane').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
@@ -367,10 +436,10 @@
             if (tabName === 'riwayat') updateReportUI();
         }
 
-        // --- 3. BOTTOM SHEET LOGIC ---
+        // --- 3. BOTTOM SHEET LOGIC (DRAG & CLICK) ---
         const aboutOverlay = document.getElementById('aboutSheetOverlay');
         const aboutSheet = document.getElementById('aboutSheet');
-        let sheetStartY = 0, sheetCurrentY = 0;
+        let sheetStartY = null, sheetCurrentY = 0;
 
         function openAboutSheet() {
             aboutOverlay.style.display = 'flex';
@@ -383,16 +452,26 @@
         }
 
         aboutOverlay.addEventListener('click', (e) => { if(e.target === aboutOverlay) closeAboutSheet(); });
-        aboutSheet.addEventListener('touchstart', (e) => { sheetStartY = e.touches[0].clientY; aboutSheet.style.transition = 'none'; });
+        
+        aboutSheet.addEventListener('touchstart', (e) => {
+            // Hanya izinkan ditarik jika scroll berada di paling atas
+            if(aboutSheet.scrollTop === 0) {
+                sheetStartY = e.touches[0].clientY;
+                aboutSheet.style.transition = 'none';
+            } else { sheetStartY = null; }
+        });
         aboutSheet.addEventListener('touchmove', (e) => {
+            if(sheetStartY === null) return;
             sheetCurrentY = e.touches[0].clientY;
             let diff = sheetCurrentY - sheetStartY;
             if (diff > 0) aboutSheet.style.transform = `translateY(${diff}px)`;
         });
         aboutSheet.addEventListener('touchend', (e) => {
+            if(sheetStartY === null) return;
             let diff = sheetCurrentY - sheetStartY;
             aboutSheet.style.transition = 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
             if (diff > 100) closeAboutSheet(); else aboutSheet.style.transform = 'translateY(0)';
+            sheetStartY = null;
         });
 
         // --- 4. DOM & STATE KASIR ---
@@ -487,16 +566,19 @@
             inputTerima.value = (v1 + v2).toLocaleString('id-ID'); closeSplitModal(); calculate();
         }
 
-        // --- 8. LOGIKA PEMBUKUAN ---
+        // --- 8. LOGIKA PEMBUKUAN (DENGAN UANG DITERIMA) ---
         function saveTransaction() {
             const total = getRawValue(inputTotal.value);
             if (total <= 0) return;
 
             let tunaiPortion = 0, qrisPortion = 0, methodLabel = "";
+            let terimaAmount = getRawValue(inputTerima.value);
+
             if (isSplitActive) {
                 methodLabel = "Split";
                 if (splitData.m1 === 'Tunai') tunaiPortion += splitData.v1; else qrisPortion += splitData.v1;
                 if (splitData.m2 === 'Tunai') tunaiPortion += splitData.v2; else qrisPortion += splitData.v2;
+                terimaAmount = splitData.v1 + splitData.v2;
             } else {
                 methodLabel = document.querySelector('input[name="payment"]:checked').value;
                 if (methodLabel === 'Tunai') tunaiPortion = total; else qrisPortion = total;
@@ -504,7 +586,8 @@
 
             const now = new Date();
             const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-            transactions.unshift({ id: Date.now(), total: total, method: methodLabel, tunai: tunaiPortion, qris: qrisPortion, time: timeStr });
+            // Properti `terima` ditambahkan ke object history
+            transactions.unshift({ id: Date.now(), total: total, terima: terimaAmount, method: methodLabel, tunai: tunaiPortion, qris: qrisPortion, time: timeStr });
             localStorage.setItem('kasir_transactions', JSON.stringify(transactions));
 
             resetForm(); switchTab('riwayat');
@@ -517,10 +600,15 @@
                 listHTML += `
                     <div class="history-item">
                         <div class="item-meta">
-                            <span class="item-amount">Rp ${tx.total.toLocaleString('id-ID')}</span>
-                            <span class="item-time">${tx.time} WIB</span>
+                            <span class="item-amount">Total: Rp ${tx.total.toLocaleString('id-ID')}</span>
+                            <span class="item-time">${tx.time} WIB • Terima: Rp ${tx.terima.toLocaleString('id-ID')}</span>
                         </div>
-                        <span class="item-method">${tx.method}</span>
+                        <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
+                            <span class="item-method">${tx.method}</span>
+                            <span style="font-size:0.7rem; font-weight:700; color:var(--text-muted);">
+                                ${tx.terima - tx.total > 0 ? 'Kbl: Rp ' + (tx.terima - tx.total).toLocaleString('id-ID') : 'Pas'}
+                            </span>
+                        </div>
                     </div>`;
             });
             document.getElementById('omzetTotal').innerText = "Rp " + totalOmzet.toLocaleString('id-ID');
@@ -534,6 +622,60 @@
             if (prompt('⚠️ PERINGATAN: Data omzet akan di-reset.\n\nKetik "HAPUS" untuk mengonfirmasi:') === 'HAPUS') {
                 transactions = []; localStorage.removeItem('kasir_transactions'); updateReportUI(); alert('Data pembukuan berhasil dikosongkan.');
             } else { alert('Kata kunci salah. Penghapusan dibatalkan.'); }
+        }
+
+        // --- 9. LOGIKA KALKULATOR PRO ---
+        let calcVal = '0';
+        let calcExpr = '';
+        const calcDisplay = document.getElementById('calcDisplay');
+        const calcHistory = document.getElementById('calcHistory');
+
+        function calcAction(val) {
+            if (val === 'AC') {
+                calcVal = '0'; calcExpr = '';
+            } else if (val === 'DEL') {
+                calcVal = calcVal.length > 1 ? calcVal.slice(0, -1) : '0';
+            } else if (val === '=') {
+                try {
+                    calcExpr = calcVal;
+                    // Bersihkan ekspresi untuk evaluasi math yang aman
+                    let toEval = calcVal.replace(/×/g, '*').replace(/÷/g, '/');
+                    // Jika berakhir dengan operator, hapus operatornya
+                    if(/[+\-*/.]$/.test(toEval)) toEval = toEval.slice(0,-1);
+                    
+                    let res = new Function('return ' + toEval)();
+                    // Tangani float yang terlalu panjang
+                    if (res % 1 !== 0) res = parseFloat(res.toFixed(6));
+                    calcVal = String(res);
+                } catch(e) { calcVal = 'Error'; }
+            } else if (val === '%') {
+                try {
+                    let toEval = calcVal.replace(/×/g, '*').replace(/÷/g, '/');
+                    let res = new Function('return ' + toEval)() / 100;
+                    calcVal = String(res);
+                } catch(e) {}
+            } else {
+                // Konversi simbol operator untuk display
+                if (val === '*') val = '×';
+                if (val === '/') val = '÷';
+                
+                // Mencegah operator beruntun
+                const isOp = ['+','-','×','÷'].includes(val);
+                const lastChar = calcVal.slice(-1);
+                const isLastOp = ['+','-','×','÷'].includes(lastChar);
+                
+                if (isOp && isLastOp) {
+                    calcVal = calcVal.slice(0, -1) + val;
+                } else {
+                    if (calcVal === '0' && !isOp && val !== '.') {
+                        calcVal = val;
+                    } else {
+                        calcVal += val;
+                    }
+                }
+            }
+            calcDisplay.value = calcVal;
+            calcHistory.innerText = calcExpr ? calcExpr + ' =' : '';
         }
     </script>
 </body>
