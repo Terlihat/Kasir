@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kasir Pintar v2.3.0</title>
+    <title>Kasir Pintar v2.3.1</title>
     
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#121212">
@@ -22,6 +22,7 @@
         [data-theme="dark-sunset"] { --bg-color: #2a0a0a; --surface-color: #450a0a; --text-main: #ffedd5; --text-muted: #fdba74; --primary: #f97316; --primary-hover: #ea580c; --success: #10b981; --danger: #ef4444; --border: #7f1d1d; --btn-bg: #7f1d1d; --btn-text: #ffedd5; --status-bg: #2a0a0a; --nav-bg: #450a0a; }
         [data-theme="dark-rosegold"] { --bg-color: #292524; --surface-color: #44403c; --text-main: #ffe4e6; --text-muted: #fda4af; --primary: #f43f5e; --primary-hover: #e11d48; --success: #10b981; --danger: #ef4444; --border: #57534e; --btn-bg: #57534e; --btn-text: #ffe4e6; --status-bg: #292524; --nav-bg: #44403c; }
         [data-theme="dark-neon"] { --bg-color: #050505; --surface-color: #111111; --text-main: #ffffff; --text-muted: #a3a3a3; --primary: #00ffff; --primary-hover: #00cccc; --success: #39ff14; --danger: #ff007f; --border: #222222; --btn-bg: #1a1a1a; --btn-text: #ffffff; --status-bg: #000000; --nav-bg: #0a0a0a; }
+        
         [data-theme="light-nordic"] { --bg-color: #f8fafc; --surface-color: #ffffff; --text-main: #334155; --text-muted: #64748b; --primary: #64748b; --primary-hover: #475569; --success: #059669; --danger: #dc2626; --border: #e2e8f0; --btn-bg: #f1f5f9; --btn-text: #334155; --status-bg: #f8fafc; --nav-bg: #ffffff; }
         [data-theme="light-citrus"] { --bg-color: #fffbeb; --surface-color: #ffffff; --text-main: #78350f; --text-muted: #b45309; --primary: #f59e0b; --primary-hover: #d97706; --success: #059669; --danger: #dc2626; --border: #fde68a; --btn-bg: #fef3c7; --btn-text: #78350f; --status-bg: #fffbeb; --nav-bg: #ffffff; }
         [data-theme="light-cottoncandy"] { --bg-color: #fdf2f8; --surface-color: #ffffff; --text-main: #831843; --text-muted: #db2777; --primary: #ec4899; --primary-hover: #db2777; --success: #059669; --danger: #dc2626; --border: #fbcfe8; --btn-bg: #fce7f3; --btn-text: #831843; --status-bg: #fdf2f8; --nav-bg: #ffffff; }
@@ -45,7 +46,7 @@
         .tab-pane.active { display: flex; opacity: 1; }
 
         /* =========================================
-           3. TAB KASIR (DIPERBESAR)
+           3. TAB KASIR (FIXED)
         ========================================= */
         #tab-kasir { padding: 12px 16px; justify-content: space-between; overflow: hidden; }
         .form-group label { display: block; font-size: 0.75rem; margin-bottom: 6px; color: var(--text-muted); font-weight: 800; text-transform: uppercase; }
@@ -58,13 +59,8 @@
         .payment-label { text-align: center; padding: 12px 8px; background-color: var(--surface-color); color: var(--text-main); border: 2px solid transparent; border-radius: 10px; font-size: 0.85rem; font-weight: 800; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .payment-methods input[type="radio"]:checked + .payment-label { background-color: var(--primary); color: #ffffff; }
 
-        /* PERUBAHAN GRID NOMINAL (Diperbesar) */
         .quick-amounts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
-        .btn-quick { 
-            background-color: var(--surface-color); color: var(--text-main); border: none; 
-            padding: 16px 0; border-radius: 10px; font-weight: 800; font-size: 1rem; /* Ukuran lebih besar */
-            cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: transform 0.1s;
-        }
+        .btn-quick { background-color: var(--surface-color); color: var(--text-main); border: none; padding: 16px 0; border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: transform 0.1s; }
         .btn-quick.pas { grid-column: span 2; background-color: var(--primary); color: white; }
         .btn-quick:active { transform: scale(0.95); }
         .btn-clear { color: var(--danger); background-color: var(--surface-color); }
@@ -87,22 +83,15 @@
         .btn-reset { background-color: var(--btn-bg); color: var(--text-muted); flex: 0.4; }
 
         /* =========================================
-           4. TAB KALKULATOR PRO (BARU)
+           4. TAB KALKULATOR PRO
         ========================================= */
         #tab-kalkulator { padding: 20px; justify-content: space-between; overflow: hidden; display: none; }
-        .calc-display-container {
-            background-color: var(--surface-color); padding: 24px 20px; border-radius: 20px;
-            margin-bottom: 20px; text-align: right; box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); border: 1px solid var(--border);
-        }
+        .calc-display-container { background-color: var(--surface-color); padding: 24px 20px; border-radius: 20px; margin-bottom: 20px; text-align: right; box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); border: 1px solid var(--border); }
         .calc-history { font-size: 1rem; color: var(--text-muted); min-height: 1.2em; margin-bottom: 8px; font-weight: 600; }
         .calc-display { width: 100%; background: transparent; border: none; font-size: 2.8rem; font-weight: 800; color: var(--text-main); text-align: right; outline: none; }
         
         .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; flex: 1; align-content: end; }
-        .calc-btn { 
-            background-color: var(--surface-color); color: var(--text-main); font-size: 1.4rem; font-weight: 800; 
-            border: none; border-radius: 16px; padding: 18px 0; cursor: pointer; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.1s, filter 0.2s; 
-        }
+        .calc-btn { background-color: var(--surface-color); color: var(--text-main); font-size: 1.4rem; font-weight: 800; border: none; border-radius: 16px; padding: 18px 0; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.1s, filter 0.2s; }
         .calc-btn:active { transform: scale(0.93); filter: brightness(0.9); }
         .calc-op { color: var(--primary); background-color: var(--status-bg); font-size: 1.6rem; }
         .calc-eq { background-color: var(--primary); color: white; }
@@ -122,13 +111,12 @@
         .history-item { display: flex; justify-content: space-between; align-items: center; padding: 14px; background-color: var(--surface-color); border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.03); }
         .item-meta { display: flex; flex-direction: column; gap: 4px; }
         .item-time { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; }
-        /* Badge Kembalian di Riwayat */
         .item-method { font-size: 0.7rem; font-weight: 800; color: var(--primary); background-color: var(--status-bg); padding: 4px 8px; border-radius: 6px; align-self: flex-end; }
         .item-amount { font-weight: 800; font-size: 1rem; }
         .btn-clear-history { width: 100%; background-color: var(--surface-color); color: var(--danger); border: 2px solid var(--border); padding: 14px; font-size: 0.85rem; font-weight: 800; border-radius: 12px; margin-top: 20px; cursor: pointer; }
 
         /* =========================================
-           6. BOTTOM NAV (SUSUNAN BARU)
+           6. BOTTOM NAV
         ========================================= */
         .bottom-nav { display: flex; background-color: var(--nav-bg); border-top: 1px solid var(--border); height: 65px; flex-shrink: 0; padding-bottom: max(0px, env(safe-area-inset-bottom)); }
         .nav-item { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; background: none; border: none; color: var(--text-muted); cursor: pointer; gap: 4px; transition: color 0.2s; }
@@ -137,7 +125,7 @@
         .nav-text { font-size: 0.7rem; font-weight: 800; }
 
         /* =========================================
-           7. MODALS & BOTTOM SHEET (TEMA PINDAH KESINI)
+           7. MODALS & BOTTOM SHEET
         ========================================= */
         .modal-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
         .modal-overlay.active { display: flex; opacity: 1; }
@@ -158,17 +146,10 @@
         .btn-modal-apply { background-color: var(--primary); color: white; }
 
         /* Bottom Sheet Theme & Author */
-        .bottom-sheet-container {
-            position: absolute; bottom: 0; left: 0; width: 100%; max-height: 85vh; overflow-y: auto;
-            background-color: var(--surface-color); border-radius: 24px 24px 0 0;
-            padding: 10px 24px 30px 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
-            transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 101; display: flex; flex-direction: column;
-        }
+        .bottom-sheet-container { position: absolute; bottom: 0; left: 0; width: 100%; max-height: 85vh; overflow-y: auto; background-color: var(--surface-color); border-radius: 24px 24px 0 0; padding: 10px 24px 30px 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 101; display: flex; flex-direction: column; }
         .modal-overlay.sheet-active .bottom-sheet-container { transform: translateY(0); }
         .drag-handle { width: 40px; height: 5px; background-color: var(--border); border-radius: 5px; margin: 0 auto 20px auto; flex-shrink: 0; }
         
-        /* Grid Tema di dalam Bottom Sheet */
         .theme-section-title { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px; margin-top: 10px; }
         .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
         .theme-btn { background-color: var(--bg-color); border: 2px solid transparent; color: var(--text-main); padding: 14px; border-radius: 12px; font-size: 0.85rem; font-weight: 800; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 10px; }
@@ -360,7 +341,6 @@
         <div id="aboutSheetOverlay" class="modal-overlay" style="align-items: flex-end; padding: 0;">
             <div id="aboutSheet" class="bottom-sheet-container">
                 <div class="drag-handle"></div>
-                
                 <div style="width: 100%;">
                     <div class="theme-section-title">Mode Gelap (Dark)</div>
                     <div class="theme-grid">
@@ -384,10 +364,9 @@
                 </div>
 
                 <div class="sheet-divider"></div>
-                
                 <div class="sheet-footer">
                     <h2 class="sheet-title">Kasir Pintar</h2>
-                    <div class="sheet-version">Versi 2.3.0 PWA</div>
+                    <div class="sheet-version">Versi 2.3.1 PWA</div>
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Dibuat oleh <span style="font-weight: 800; color: var(--primary);">Sulfikar</span></p>
                     <div class="social-icons">
                         <a href="#" class="social-btn" style="background-color: #1877F2;">
@@ -408,9 +387,7 @@
     <script>
         // --- 0. REGISTER PWA SERVICE WORKER ---
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW fail', err));
-            });
+            window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(err => console.log('SW fail', err)); });
         }
 
         // --- 1. SYSTEM TEMA ---
@@ -423,7 +400,10 @@
                 btn.classList.remove('active');
                 if(btn.getAttribute('onclick').includes(themeName)) btn.classList.add('active');
             });
-            document.querySelector('meta[name="theme-color"]').setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim());
+            const themeMeta = document.querySelector('meta[name="theme-color"]');
+            if (themeMeta) {
+                themeMeta.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim());
+            }
         }
         setTheme(savedTheme);
 
@@ -436,7 +416,7 @@
             if (tabName === 'riwayat') updateReportUI();
         }
 
-        // --- 3. BOTTOM SHEET LOGIC (DRAG & CLICK) ---
+        // --- 3. BOTTOM SHEET LOGIC ---
         const aboutOverlay = document.getElementById('aboutSheetOverlay');
         const aboutSheet = document.getElementById('aboutSheet');
         let sheetStartY = null, sheetCurrentY = 0;
@@ -454,7 +434,6 @@
         aboutOverlay.addEventListener('click', (e) => { if(e.target === aboutOverlay) closeAboutSheet(); });
         
         aboutSheet.addEventListener('touchstart', (e) => {
-            // Hanya izinkan ditarik jika scroll berada di paling atas
             if(aboutSheet.scrollTop === 0) {
                 sheetStartY = e.touches[0].clientY;
                 aboutSheet.style.transition = 'none';
@@ -474,13 +453,12 @@
             sheetStartY = null;
         });
 
-        // --- 4. DOM & STATE KASIR ---
+        // --- 4. DOM & DATA STORAGE (SAFE PARSE) ---
         const inputTotal = document.getElementById('totalBelanja');
         const inputTerima = document.getElementById('uangDiterima');
         const displayTotal = document.getElementById('displayTotal');
         const statusResult = document.getElementById('statusResult');
         const btnSaveTx = document.getElementById('btnSaveTx');
-        
         const modalOverlay = document.getElementById('splitModal');
         const splitAmount1 = document.getElementById('splitAmount1');
         const splitAmount2 = document.getElementById('splitAmount2');
@@ -489,7 +467,12 @@
 
         let isSplitActive = false;
         let splitData = { m1: '', v1: 0, m2: '', v2: 0 };
-        let transactions = JSON.parse(localStorage.getItem('kasir_transactions')) || [];
+        
+        // Anti-Crash untuk data lama
+        let transactions = [];
+        try {
+            transactions = JSON.parse(localStorage.getItem('kasir_transactions')) || [];
+        } catch (e) { transactions = []; }
 
         // --- 5. FORMAT KEYBOARD MOBILE ---
         function removeFormat(input) { input.value = input.value.replace(/[^0-9]/g, ''); }
@@ -566,7 +549,7 @@
             inputTerima.value = (v1 + v2).toLocaleString('id-ID'); closeSplitModal(); calculate();
         }
 
-        // --- 8. LOGIKA PEMBUKUAN (DENGAN UANG DITERIMA) ---
+        // --- 8. LOGIKA PEMBUKUAN AMAN DARI CRASH ---
         function saveTransaction() {
             const total = getRawValue(inputTotal.value);
             if (total <= 0) return;
@@ -586,7 +569,6 @@
 
             const now = new Date();
             const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-            // Properti `terima` ditambahkan ke object history
             transactions.unshift({ id: Date.now(), total: total, terima: terimaAmount, method: methodLabel, tunai: tunaiPortion, qris: qrisPortion, time: timeStr });
             localStorage.setItem('kasir_transactions', JSON.stringify(transactions));
 
@@ -595,22 +577,30 @@
 
         function updateReportUI() {
             let totalOmzet = 0, totalTunai = 0, totalQris = 0, listHTML = "";
+            
             transactions.forEach(tx => {
                 totalOmzet += tx.total; totalTunai += tx.tunai; totalQris += tx.qris;
+                
+                // BACKWARD COMPATIBILITY: Cegah error "undefined" jika data lama tidak ada nilai "terima"
+                let amanTerima = tx.terima !== undefined ? tx.terima : tx.total;
+                let kembalian = amanTerima - tx.total;
+                let statusKembalian = kembalian > 0 ? 'Kbl: Rp ' + kembalian.toLocaleString('id-ID') : 'Pas';
+
                 listHTML += `
                     <div class="history-item">
                         <div class="item-meta">
                             <span class="item-amount">Total: Rp ${tx.total.toLocaleString('id-ID')}</span>
-                            <span class="item-time">${tx.time} WIB • Terima: Rp ${tx.terima.toLocaleString('id-ID')}</span>
+                            <span class="item-time">${tx.time} WIB • Terima: Rp ${amanTerima.toLocaleString('id-ID')}</span>
                         </div>
                         <div style="display:flex; flex-direction:column; align-items:flex-end; gap:4px;">
                             <span class="item-method">${tx.method}</span>
                             <span style="font-size:0.7rem; font-weight:700; color:var(--text-muted);">
-                                ${tx.terima - tx.total > 0 ? 'Kbl: Rp ' + (tx.terima - tx.total).toLocaleString('id-ID') : 'Pas'}
+                                ${statusKembalian}
                             </span>
                         </div>
                     </div>`;
             });
+
             document.getElementById('omzetTotal').innerText = "Rp " + totalOmzet.toLocaleString('id-ID');
             document.getElementById('omzetTunai').innerText = "Rp " + totalTunai.toLocaleString('id-ID');
             document.getElementById('omzetQris').innerText = "Rp " + totalQris.toLocaleString('id-ID');
@@ -625,58 +615,48 @@
         }
 
         // --- 9. LOGIKA KALKULATOR PRO ---
-        let calcVal = '0';
-        let calcExpr = '';
+        let calcVal = '0'; let calcExpr = '';
         const calcDisplay = document.getElementById('calcDisplay');
         const calcHistory = document.getElementById('calcHistory');
 
         function calcAction(val) {
-            if (val === 'AC') {
-                calcVal = '0'; calcExpr = '';
-            } else if (val === 'DEL') {
-                calcVal = calcVal.length > 1 ? calcVal.slice(0, -1) : '0';
-            } else if (val === '=') {
+            if (val === 'AC') { calcVal = '0'; calcExpr = ''; } 
+            else if (val === 'DEL') { calcVal = calcVal.length > 1 ? calcVal.slice(0, -1) : '0'; } 
+            else if (val === '=') {
                 try {
                     calcExpr = calcVal;
-                    // Bersihkan ekspresi untuk evaluasi math yang aman
                     let toEval = calcVal.replace(/×/g, '*').replace(/÷/g, '/');
-                    // Jika berakhir dengan operator, hapus operatornya
                     if(/[+\-*/.]$/.test(toEval)) toEval = toEval.slice(0,-1);
-                    
                     let res = new Function('return ' + toEval)();
-                    // Tangani float yang terlalu panjang
                     if (res % 1 !== 0) res = parseFloat(res.toFixed(6));
                     calcVal = String(res);
-                } catch(e) { calcVal = 'Error'; }
-            } else if (val === '%') {
+                } catch(e) { calcVal = '0'; }
+            } 
+            else if (val === '%') {
                 try {
                     let toEval = calcVal.replace(/×/g, '*').replace(/÷/g, '/');
                     let res = new Function('return ' + toEval)() / 100;
                     calcVal = String(res);
-                } catch(e) {}
-            } else {
-                // Konversi simbol operator untuk display
-                if (val === '*') val = '×';
-                if (val === '/') val = '÷';
-                
-                // Mencegah operator beruntun
+                } catch(e) { calcVal = '0'; }
+            } 
+            else {
+                if (val === '*') val = '×'; if (val === '/') val = '÷';
                 const isOp = ['+','-','×','÷'].includes(val);
-                const lastChar = calcVal.slice(-1);
-                const isLastOp = ['+','-','×','÷'].includes(lastChar);
+                const isLastOp = ['+','-','×','÷'].includes(calcVal.slice(-1));
                 
-                if (isOp && isLastOp) {
-                    calcVal = calcVal.slice(0, -1) + val;
-                } else {
-                    if (calcVal === '0' && !isOp && val !== '.') {
-                        calcVal = val;
-                    } else {
-                        calcVal += val;
-                    }
+                if (calcVal === 'Error') calcVal = '0';
+                if (isOp && isLastOp) { calcVal = calcVal.slice(0, -1) + val; } 
+                else {
+                    if (calcVal === '0' && !isOp && val !== '.') calcVal = val;
+                    else calcVal += val;
                 }
             }
             calcDisplay.value = calcVal;
             calcHistory.innerText = calcExpr ? calcExpr + ' =' : '';
         }
+        
+        // Panggil update UI di awal agar data riwayat aman langsung di-render
+        updateReportUI();
     </script>
 </body>
 </html>
