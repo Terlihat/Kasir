@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Kasir Pintar v2.3.2</title>
+    <title>Kasir Pintar v2.3.3</title>
     
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#121212">
@@ -22,7 +22,6 @@
         [data-theme="dark-sunset"] { --bg-color: #2a0a0a; --surface-color: #450a0a; --text-main: #ffedd5; --text-muted: #fdba74; --primary: #f97316; --primary-hover: #ea580c; --success: #10b981; --danger: #ef4444; --border: #7f1d1d; --btn-bg: #7f1d1d; --btn-text: #ffedd5; --status-bg: #2a0a0a; --nav-bg: #450a0a; }
         [data-theme="dark-rosegold"] { --bg-color: #292524; --surface-color: #44403c; --text-main: #ffe4e6; --text-muted: #fda4af; --primary: #f43f5e; --primary-hover: #e11d48; --success: #10b981; --danger: #ef4444; --border: #57534e; --btn-bg: #57534e; --btn-text: #ffe4e6; --status-bg: #292524; --nav-bg: #44403c; }
         [data-theme="dark-neon"] { --bg-color: #050505; --surface-color: #111111; --text-main: #ffffff; --text-muted: #a3a3a3; --primary: #00ffff; --primary-hover: #00cccc; --success: #39ff14; --danger: #ff007f; --border: #222222; --btn-bg: #1a1a1a; --btn-text: #ffffff; --status-bg: #000000; --nav-bg: #0a0a0a; }
-        
         [data-theme="light-nordic"] { --bg-color: #f8fafc; --surface-color: #ffffff; --text-main: #334155; --text-muted: #64748b; --primary: #64748b; --primary-hover: #475569; --success: #059669; --danger: #dc2626; --border: #e2e8f0; --btn-bg: #f1f5f9; --btn-text: #334155; --status-bg: #f8fafc; --nav-bg: #ffffff; }
         [data-theme="light-citrus"] { --bg-color: #fffbeb; --surface-color: #ffffff; --text-main: #78350f; --text-muted: #b45309; --primary: #f59e0b; --primary-hover: #d97706; --success: #059669; --danger: #dc2626; --border: #fde68a; --btn-bg: #fef3c7; --btn-text: #78350f; --status-bg: #fffbeb; --nav-bg: #ffffff; }
         [data-theme="light-cottoncandy"] { --bg-color: #fdf2f8; --surface-color: #ffffff; --text-main: #831843; --text-muted: #db2777; --primary: #ec4899; --primary-hover: #db2777; --success: #059669; --danger: #dc2626; --border: #fbcfe8; --btn-bg: #fce7f3; --btn-text: #831843; --status-bg: #fdf2f8; --nav-bg: #ffffff; }
@@ -36,10 +35,10 @@
         body { background-color: var(--bg-color); color: var(--text-main); display: flex; justify-content: center; overflow: hidden; overscroll-behavior-y: none; transition: background-color 0.3s, color 0.3s; }
         .app-container { width: 100%; max-width: 480px; height: 100vh; height: 100dvh; background-color: var(--surface-color); display: flex; flex-direction: column; position: relative; overflow: hidden; }
 
-        header { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; background-color: var(--surface-color); border-bottom: 1px solid var(--border); flex-shrink: 0; z-index: 10; }
+        header { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; background-color: var(--surface-color); border-bottom: 1px solid var(--border); flex-shrink: 0; z-index: 50; }
         .header-spacer { width: 32px; } 
         .header-title { text-align: center; flex: 1; } .header-title h1 { font-size: 1.15rem; font-weight: 800; }
-        .btn-menu-dots { background: none; border: none; color: var(--text-main); font-size: 1.5rem; cursor: pointer; width: 32px; height: 32px; display: flex; justify-content: flex-end; align-items: center; }
+        .btn-menu-dots { background: none; border: none; color: var(--text-main); font-size: 1.8rem; cursor: pointer; width: 32px; height: 32px; display: flex; justify-content: flex-end; align-items: center; z-index: 60; }
 
         /* AREA TAB */
         main { flex: 1; position: relative; overflow: hidden; background-color: var(--bg-color); }
@@ -47,37 +46,40 @@
         .tab-pane.active { display: flex; opacity: 1; }
 
         /* =========================================
-           3. TAB KASIR
+           3. TAB KASIR (DIKUNCI / NO SCROLL)
         ========================================= */
-        #tab-kasir { padding: 12px 16px; justify-content: space-between; overflow: hidden; }
-        .form-group label { display: block; font-size: 0.75rem; margin-bottom: 6px; color: var(--text-muted); font-weight: 800; text-transform: uppercase; }
-        .input-box { width: 100%; background-color: var(--surface-color); border: 2px solid transparent; color: var(--text-main); padding: 12px 16px; font-size: 1.25rem; font-weight: bold; border-radius: 10px; outline: none; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .input-box:focus { border-color: var(--primary); } .input-box::placeholder { color: var(--text-muted); font-weight: 600; font-size: 1rem; }
+        #tab-kasir { padding: 10px 16px; justify-content: space-between; display: flex; flex-direction: column; overflow: hidden; }
+        
+        .form-group label { display: block; font-size: 0.7rem; margin-bottom: 4px; color: var(--text-muted); font-weight: 800; text-transform: uppercase; }
+        .input-box { width: 100%; background-color: var(--surface-color); border: 2px solid transparent; color: var(--text-main); padding: 10px 14px; font-size: 1.15rem; font-weight: bold; border-radius: 10px; outline: none; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .input-box:focus { border-color: var(--primary); } .input-box::placeholder { color: var(--text-muted); font-weight: 600; font-size: 0.95rem; }
 
-        .payment-methods { display: flex; flex-direction: column; gap: 8px; margin: 8px 0; }
-        .payment-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .payment-methods { display: flex; flex-direction: column; gap: 6px; margin: 8px 0; }
+        .payment-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
         .payment-methods input[type="radio"] { display: none; }
-        .payment-label { text-align: center; padding: 12px 8px; background-color: var(--surface-color); color: var(--text-main); border: 2px solid transparent; border-radius: 10px; font-size: 0.85rem; font-weight: 800; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .payment-label { text-align: center; padding: 10px 8px; background-color: var(--surface-color); color: var(--text-main); border: 2px solid transparent; border-radius: 10px; font-size: 0.8rem; font-weight: 800; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .payment-methods input[type="radio"]:checked + .payment-label { background-color: var(--primary); color: #ffffff; }
 
-        .quick-amounts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
-        .btn-quick { background-color: var(--surface-color); color: var(--text-main); border: none; padding: 16px 0; border-radius: 10px; font-weight: 800; font-size: 1rem; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: transform 0.1s; }
+        /* GRID NOMINAL (Diperbarui agar pas di layar kecil) */
+        .quick-amounts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 6px; }
+        .btn-quick { background-color: var(--surface-color); color: var(--text-main); border: none; padding: 12px 0; border-radius: 10px; font-weight: 800; font-size: 0.95rem; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: transform 0.1s; }
         .btn-quick.pas { grid-column: span 2; background-color: var(--primary); color: white; }
         .btn-quick:active { transform: scale(0.95); }
         .btn-clear { color: var(--danger); background-color: var(--surface-color); }
 
-        .summary-section { background-color: var(--surface-color); padding: 16px; border-radius: 16px; margin-top: auto; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); }
-        .total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-        .total-label { font-size: 0.9rem; font-weight: 800; color: var(--text-muted); }
-        .total-value { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+        /* SUMMARY SECTION (Diberi margin yang lega) */
+        .summary-section { background-color: var(--surface-color); padding: 14px 16px; border-radius: 16px; margin-top: auto; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); }
+        .total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .total-label { font-size: 0.85rem; font-weight: 800; color: var(--text-muted); }
+        .total-value { font-size: 1.25rem; font-weight: 800; color: var(--primary); }
 
-        .status-box { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background-color: var(--status-bg); border-radius: 10px; margin-bottom: 12px;}
-        .status-label { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); }
-        .status-result { font-size: 0.95rem; font-weight: 800; text-align: right; }
+        .status-box { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background-color: var(--status-bg); border-radius: 10px; margin-bottom: 10px;}
+        .status-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); }
+        .status-result { font-size: 0.9rem; font-weight: 800; text-align: right; }
         .text-green { color: var(--success); } .text-red { color: var(--danger); } .text-neutral { color: var(--text-muted); }
 
         .action-buttons { display: flex; gap: 8px; }
-        .btn-action { flex: 1; padding: 14px; border-radius: 10px; font-size: 0.9rem; font-weight: 800; cursor: pointer; border: none; transition: transform 0.1s; }
+        .btn-action { flex: 1; padding: 12px; border-radius: 10px; font-size: 0.85rem; font-weight: 800; cursor: pointer; border: none; transition: transform 0.1s; }
         .btn-action:active { transform: scale(0.97); }
         .btn-save { background-color: var(--success); color: #ffffff; }
         .btn-save:disabled { background-color: var(--btn-bg); color: var(--text-muted); }
@@ -86,8 +88,7 @@
         /* =========================================
            4. TAB KALKULATOR PRO
         ========================================= */
-        /* Hapus display:none di CSS ID agar logic JS tab-pane bekerja murni */
-        #tab-kalkulator { padding: 20px; justify-content: space-between; overflow: hidden; }
+        #tab-kalkulator { padding: 20px; display: none; flex-direction: column; justify-content: space-between; height: 100%; overflow: hidden; }
         .calc-display-container { background-color: var(--surface-color); padding: 24px 20px; border-radius: 20px; margin-bottom: 20px; text-align: right; box-shadow: inset 0 2px 10px rgba(0,0,0,0.05); border: 1px solid var(--border); }
         .calc-history { font-size: 1rem; color: var(--text-muted); min-height: 1.2em; margin-bottom: 8px; font-weight: 600; }
         .calc-display { width: 100%; background: transparent; border: none; font-size: 2.8rem; font-weight: 800; color: var(--text-main); text-align: right; outline: none; }
@@ -103,8 +104,7 @@
         /* =========================================
            5. TAB RIWAYAT
         ========================================= */
-        /* Hapus display:none di CSS ID agar logic JS tab-pane bekerja murni */
-        #tab-riwayat { overflow-y: auto; padding: 20px; }
+        #tab-riwayat { overflow-y: auto; padding: 20px; display: none; flex-direction: column; }
         .report-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
         .report-card { background-color: var(--surface-color); padding: 16px 10px; border-radius: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .card-label { display: block; font-size: 0.65rem; color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-bottom: 6px; }
@@ -116,7 +116,7 @@
         .item-time { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; }
         .item-method { font-size: 0.7rem; font-weight: 800; color: var(--primary); background-color: var(--status-bg); padding: 4px 8px; border-radius: 6px; align-self: flex-end; }
         .item-amount { font-weight: 800; font-size: 1rem; }
-        .btn-clear-history { width: 100%; background-color: var(--surface-color); color: var(--danger); border: 2px solid var(--border); padding: 14px; font-size: 0.85rem; font-weight: 800; border-radius: 12px; margin-top: 20px; cursor: pointer; }
+        .btn-clear-history { width: 100%; background-color: var(--surface-color); color: var(--danger); border: 2px solid var(--border); padding: 14px; font-size: 0.85rem; font-weight: 800; border-radius: 12px; margin-top: 20px; margin-bottom: 30px; cursor: pointer; }
 
         /* =========================================
            6. BOTTOM NAV
@@ -128,10 +128,15 @@
         .nav-text { font-size: 0.7rem; font-weight: 800; }
 
         /* =========================================
-           7. MODALS & BOTTOM SHEET
+           7. MODALS & BOTTOM SHEET (FIXED)
         ========================================= */
-        .modal-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); display: none; justify-content: center; align-items: center; z-index: 100; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
-        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-overlay { 
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+            background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); 
+            display: none; justify-content: center; align-items: center; 
+            z-index: 100; padding: 20px; opacity: 0; transition: opacity 0.3s ease; 
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
 
         .modal-content { width: 100%; background-color: var(--surface-color); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); transform: translateY(20px); transition: transform 0.3s ease; }
         .modal-overlay.active .modal-content { transform: translateY(0); }
@@ -149,7 +154,13 @@
         .btn-modal-apply { background-color: var(--primary); color: white; }
 
         /* Bottom Sheet Theme & Author */
-        .bottom-sheet-container { position: absolute; bottom: 0; left: 0; width: 100%; max-height: 85vh; overflow-y: auto; background-color: var(--surface-color); border-radius: 24px 24px 0 0; padding: 10px 24px 30px 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); z-index: 101; display: flex; flex-direction: column; }
+        .bottom-sheet-container { 
+            position: absolute; bottom: 0; left: 0; width: 100%; max-height: 85vh; overflow-y: auto; 
+            background-color: var(--surface-color); border-radius: 24px 24px 0 0; 
+            padding: 10px 24px 30px 24px; box-shadow: 0 -10px 40px rgba(0,0,0,0.2); 
+            transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            z-index: 101; display: flex; flex-direction: column; 
+        }
         .modal-overlay.sheet-active .bottom-sheet-container { transform: translateY(0); }
         .drag-handle { width: 40px; height: 5px; background-color: var(--border); border-radius: 5px; margin: 0 auto 20px auto; flex-shrink: 0; }
         
@@ -368,10 +379,9 @@
                 </div>
 
                 <div class="sheet-divider"></div>
-                
                 <div class="sheet-footer">
                     <h2 class="sheet-title">Kasir Pintar</h2>
-                    <div class="sheet-version">Versi 2.3.2 (Stable Fix)</div>
+                    <div class="sheet-version">Versi 2.3.3 (Stable)</div>
                     <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Dibuat oleh <span style="font-weight: 800; color: var(--primary);">Sulfikar</span></p>
                     <div class="social-icons">
                         <a href="#" class="social-btn" style="background-color: #1877F2;">
@@ -414,24 +424,39 @@
 
         // --- 2. SYSTEM TAB NAVIGATION ---
         function switchTab(tabName) {
-            document.querySelectorAll('.tab-pane').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-pane').forEach(tab => {
+                tab.style.display = 'none';
+                tab.classList.remove('active');
+            });
             document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
-            document.getElementById('tab-' + tabName).classList.add('active');
+            
+            const selectedTab = document.getElementById('tab-' + tabName);
+            selectedTab.style.display = 'flex';
+            setTimeout(() => selectedTab.classList.add('active'), 10);
+            
             document.getElementById('nav-' + tabName).classList.add('active');
             if (tabName === 'riwayat') updateReportUI();
         }
 
-        // --- 3. BOTTOM SHEET LOGIC ---
+        // Init tab display
+        document.getElementById('tab-kasir').style.display = 'flex';
+
+        // --- 3. BOTTOM SHEET LOGIC (FIXED) ---
         const aboutOverlay = document.getElementById('aboutSheetOverlay');
         const aboutSheet = document.getElementById('aboutSheet');
         let sheetStartY = null, sheetCurrentY = 0;
 
         function openAboutSheet() {
             aboutOverlay.style.display = 'flex';
-            setTimeout(() => aboutOverlay.classList.add('sheet-active'), 10);
+            // setTimeout digunakan agar transisi opacity terbaca oleh browser
+            setTimeout(() => {
+                aboutOverlay.classList.add('active');
+                aboutOverlay.classList.add('sheet-active');
+            }, 10);
         }
         function closeAboutSheet() {
             aboutOverlay.classList.remove('sheet-active');
+            aboutOverlay.classList.remove('active');
             aboutSheet.style.transform = '';
             setTimeout(() => { aboutOverlay.style.display = 'none'; }, 300);
         }
@@ -473,13 +498,10 @@
         let isSplitActive = false;
         let splitData = { m1: '', v1: 0, m2: '', v2: 0 };
         
-        // PENGAMANAN ANTI-CRASH MEMORI LOKAL
         let transactions = [];
         try {
             let parsedData = JSON.parse(localStorage.getItem('kasir_transactions'));
-            if (Array.isArray(parsedData)) {
-                transactions = parsedData;
-            }
+            if (Array.isArray(parsedData)) transactions = parsedData;
         } catch (e) { transactions = []; }
 
         // --- 5. FORMAT KEYBOARD MOBILE ---
@@ -540,7 +562,9 @@
             let half = Math.floor(total / 2);
             splitAmount1.value = half > 0 ? half.toLocaleString('id-ID') : '';
             splitAmount2.value = (total - half) > 0 ? (total - half).toLocaleString('id-ID') : '';
-            modalOverlay.classList.add('active');
+            
+            modalOverlay.style.display = 'flex';
+            setTimeout(() => modalOverlay.classList.add('active'), 10);
         }
         function syncSplitAmounts(changedField) {
             const total = getRawValue(inputTotal.value), v1 = getRawValue(splitAmount1.value), v2 = getRawValue(splitAmount2.value);
@@ -549,6 +573,7 @@
         }
         function closeSplitModal(isCancel = false) {
             modalOverlay.classList.remove('active');
+            setTimeout(() => { modalOverlay.style.display = 'none'; }, 300);
             if (isCancel) { document.getElementById('payTunai').checked = true; isSplitActive = false; calculate(); }
         }
         function applySplit() {
@@ -588,14 +613,11 @@
                 let totalOmzet = 0, totalTunai = 0, totalQris = 0, listHTML = "";
                 
                 transactions.forEach(tx => {
-                    // Pencegahan error jika data korup
                     let valTotal = Number(tx.total) || 0;
                     let valTunai = Number(tx.tunai) || 0;
                     let valQris = Number(tx.qris) || 0;
                     
-                    totalOmzet += valTotal; 
-                    totalTunai += valTunai; 
-                    totalQris += valQris;
+                    totalOmzet += valTotal; totalTunai += valTunai; totalQris += valQris;
                     
                     let amanTerima = tx.terima !== undefined ? Number(tx.terima) : valTotal;
                     let kembalian = amanTerima - valTotal;
@@ -620,9 +642,7 @@
                 document.getElementById('omzetTunai').innerText = "Rp " + totalTunai.toLocaleString('id-ID');
                 document.getElementById('omzetQris').innerText = "Rp " + totalQris.toLocaleString('id-ID');
                 document.getElementById('historyList').innerHTML = listHTML || `<div style="text-align:center; padding: 40px 0; font-size:0.85rem; color:var(--text-muted);">Belum ada penjualan hari ini.</div>`;
-            } catch (error) {
-                console.log("Error render riwayat:", error);
-            }
+            } catch (error) { console.log("Error render riwayat:", error); }
         }
 
         function clearHistory() {
@@ -632,7 +652,7 @@
             } else { alert('Kata kunci salah. Penghapusan dibatalkan.'); }
         }
 
-        // --- 9. LOGIKA KALKULATOR PRO (ERROR PROOF) ---
+        // --- 9. LOGIKA KALKULATOR PRO ---
         let calcVal = '0'; let calcExpr = '';
         const calcDisplay = document.getElementById('calcDisplay');
         const calcHistory = document.getElementById('calcHistory');
@@ -679,7 +699,6 @@
             calcHistory.innerText = calcExpr ? calcExpr + ' =' : '';
         }
         
-        // Panggil render UI aman di awal
         updateReportUI();
     </script>
 </body>
